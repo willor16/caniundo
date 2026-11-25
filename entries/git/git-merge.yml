@@ -1,0 +1,34 @@
+id: git-merge
+tool: git
+example: git merge feature
+title:
+  en: Join another branch
+  es: Unir otra rama
+match:
+  - run: git merge
+    without: [--abort, --continue, --quit]
+verdict: "yes"
+loses:
+  en: Nothing.
+  es: Nada.
+recover:
+  - id: previous
+    gives:
+      en: The branch as it was before the merge.
+      es: La rama como estaba antes del merge.
+    run: [git reset --keep ORIG_HEAD]
+    until:
+      en: Until another reset, merge or rebase, and before you push it.
+      es: Hasta otro reset, merge o rebase, y antes de subirlo.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo f > f.txt; git add f.txt; git commit -qm feature
+        git switch -q main; echo two > a.txt; git commit -qam two
+      run: git merge -q feature -m merge
+      check: test "$(git log -1 --format=%s)" = two && test ! -e f.txt

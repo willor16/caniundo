@@ -1,0 +1,40 @@
+id: git-worktree-remove
+tool: git
+example: git worktree remove ../feature
+title:
+  en: Delete a worktree
+  es: Borrar un worktree
+match:
+  - run: git worktree remove
+verdict: partly
+loses:
+  en: The ignored files in it, such as .env, without any warning. With --force, also the changes that were not committed.
+  es: Los archivos ignorados que contiene, como .env, sin avisar. Con --force, también los cambios sin confirmar.
+keeps:
+  en: The branch and its commits.
+  es: La rama y sus commits.
+recover:
+  - id: add
+    gives:
+      en: The folder, with what was committed.
+      es: La carpeta, con lo que estaba confirmado.
+    run: [git worktree add <folder> <branch>]
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: add
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git worktree add -q ../feature -b feature; cd ../feature; echo two > a.txt; git commit -qam two
+      run: git worktree remove ../feature
+      check: test "$(cat ../feature/a.txt)" = two
+      fill: { folder: ../feature, branch: feature }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; echo .env > .gitignore; git add .; git commit -qm one
+        git worktree add -q ../feature -b feature; echo KEY=1 > ../feature/.env
+      run: git worktree remove ../feature
+      check: test -e ../feature/.env

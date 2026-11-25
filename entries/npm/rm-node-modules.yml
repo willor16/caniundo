@@ -1,0 +1,35 @@
+id: rm-node-modules
+tool: npm
+example: rm -rf node_modules
+title:
+  en: Delete installed packages
+  es: Borrar los paquetes instalados
+match:
+  - run: rm
+    operands: { every: [node_modules, "*/node_modules", "node_modules/*", "*/node_modules/*"] }
+  - run: rimraf
+    operands: { every: [node_modules, "*/node_modules"] }
+  - run: remove-item
+    operands: { every: [node_modules, "*/node_modules", "node_modules/*", "*/node_modules/*"] }
+overrides: [rm, remove-item]
+verdict: "yes"
+loses:
+  en: Only changes made by hand inside that folder.
+  es: Solo los cambios hechos a mano dentro de esa carpeta.
+recover:
+  - id: install
+    gives:
+      en: The packages, with the same versions, if the project has a package-lock.json.
+      es: Los paquetes, con las mismas versiones, si el proyecto tiene package-lock.json.
+    run: [npm ci]
+proof:
+  lab: npm
+  cases:
+    - shows: restored
+      recipe: install
+      setup: |
+        mkdir dep; echo '{"name":"dep","version":"1.0.0"}' > dep/package.json; echo ok > dep/index.js
+        echo '{"name":"p","version":"1.0.0","dependencies":{"dep":"file:dep"}}' > package.json
+        npm install --silent
+      run: rm -rf node_modules
+      check: test -e node_modules/dep/index.js

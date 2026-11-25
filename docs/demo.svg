@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="893" height="766" viewBox="0 0 893 766" role="img" aria-label="caniundo">
+<rect width="100%" height="100%" rx="10" fill="#0d1117"/>
+<g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#d6dde6">
+<text x="24" y="46" xml:space="preserve"><tspan fill="#8b949e">$</tspan> caniundo "sudo docker compose down -v &amp;&amp; git reset --hard HEAD~3"</text>
+<text x="24" y="67" xml:space="preserve"></text>
+<text x="24" y="88" xml:space="preserve"><tspan font-weight="700" fill="#ff7b72">✗ NO</tspan>  <tspan font-weight="700" fill="#f2f2f2">sudo docker compose down -v</tspan></text>
+<text x="24" y="109" xml:space="preserve">  Stop a project and delete its volumes</text>
+<text x="24" y="130" xml:space="preserve"></text>
+<text x="24" y="151" xml:space="preserve">  Lost        The volumes of the project, which usually hold its database. Volumes marked as</text>
+<text x="24" y="172" xml:space="preserve">              external are kept.</text>
+<text x="24" y="193" xml:space="preserve">  Instead     Without -v, the volumes stay.</text>
+<text x="24" y="214" xml:space="preserve">              <tspan fill="#76e3ea">$ docker compose down</tspan></text>
+<text x="24" y="235" xml:space="preserve">              <tspan fill="#8b949e">and to go back</tspan></text>
+<text x="24" y="256" xml:space="preserve">              <tspan fill="#76e3ea">$ docker compose up --detach</tspan></text>
+<text x="24" y="277" xml:space="preserve"></text>
+<text x="24" y="298" xml:space="preserve">  <tspan fill="#8b949e">Documented, not tested</tspan></text>
+<text x="24" y="319" xml:space="preserve"></text>
+<text x="24" y="340" xml:space="preserve"><tspan font-weight="700" fill="#e3b341">~ PARTLY</tspan>  <tspan font-weight="700" fill="#f2f2f2">git reset --hard HEAD~3</tspan></text>
+<text x="24" y="361" xml:space="preserve">  Move a branch and discard changes</text>
+<text x="24" y="382" xml:space="preserve"></text>
+<text x="24" y="403" xml:space="preserve">  Lost        Changes that were never committed or staged, in every file git tracks.</text>
+<text x="24" y="424" xml:space="preserve">  Kept        The commits. Git remembers where the branch was.</text>
+<text x="24" y="445" xml:space="preserve">  Before      Put the changes away first.</text>
+<text x="24" y="466" xml:space="preserve">              <tspan fill="#76e3ea">$ git stash push --include-untracked</tspan></text>
+<text x="24" y="487" xml:space="preserve">              <tspan fill="#8b949e">and to go back</tspan></text>
+<text x="24" y="508" xml:space="preserve">              <tspan fill="#76e3ea">$ git stash pop</tspan></text>
+<text x="24" y="529" xml:space="preserve">  To undo     The commits that the branch lost.</text>
+<text x="24" y="550" xml:space="preserve">              <tspan fill="#76e3ea">$ git reset --keep ORIG_HEAD</tspan></text>
+<text x="24" y="571" xml:space="preserve">              Works until another reset, merge or rebase. After that, the commit is still in git</text>
+<text x="24" y="592" xml:space="preserve">              reflog, for 30 days by default.</text>
+<text x="24" y="613" xml:space="preserve">  To undo     Files that were staged with git add. The first command leaves them in that folder with</text>
+<text x="24" y="634" xml:space="preserve">              other names.</text>
+<text x="24" y="655" xml:space="preserve">              <tspan fill="#76e3ea">$ git fsck --lost-found</tspan></text>
+<text x="24" y="676" xml:space="preserve">              <tspan fill="#76e3ea">$ cp .git/lost-found/other/&lt;hash&gt; &lt;file&gt;</tspan></text>
+<text x="24" y="697" xml:space="preserve">              Until git cleans up, 2 weeks by default.</text>
+<text x="24" y="718" xml:space="preserve"></text>
+<text x="24" y="739" xml:space="preserve">  <tspan fill="#8b949e">Tested: git 2.45.2.windows.1, Windows, 2026-11-25</tspan></text>
+</g>
+</svg>

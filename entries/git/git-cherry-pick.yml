@@ -1,0 +1,34 @@
+id: git-cherry-pick
+tool: git
+example: git cherry-pick a1b2c3d
+title:
+  en: Copy a commit from another branch
+  es: Copiar un commit de otra rama
+match:
+  - run: git cherry-pick
+    without: [--abort, --continue, --quit, --skip, -n|--no-commit]
+verdict: "yes"
+loses:
+  en: Nothing.
+  es: Nada.
+recover:
+  - id: undo
+    gives:
+      en: The branch without the copied commit. Repeat it once for each commit you copied.
+      es: La rama sin el commit copiado. Repítelo una vez por cada commit que copiaste.
+    run: [git reset --keep HEAD~1]
+    until:
+      en: Right after, and before you push it.
+      es: Justo después, y antes de subirlo.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: undo
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo f > f.txt; git add f.txt; git commit -qm feature
+        git switch -q main
+      run: git cherry-pick feature
+      check: test "$(git log -1 --format=%s)" = one && test ! -e f.txt

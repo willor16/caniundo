@@ -1,0 +1,20 @@
+id: git-filter-repo
+tool: git
+example: git filter-repo --path secret.txt --invert-paths
+title:
+  en: Rewrite all the history with filter-repo
+  es: Reescribir todo el historial con filter-repo
+match:
+  - run: [git filter-repo, git-filter-repo]
+    without: [--analyze, --dry-run, -n]
+verdict: "no"
+loses:
+  en: The old history. It deletes the old commits and the reflog as soon as it finishes.
+  es: El historial viejo. Borra los commits viejos y el reflog en cuanto termina.
+before:
+  note:
+    en: Work on a fresh clone and keep the original until you have checked the result.
+    es: Trabaja en un clon nuevo y conserva el original hasta revisar el resultado.
+sources:
+  - https://raw.githubusercontent.com/newren/git-filter-repo/main/Documentation/git-filter-repo.txt
+checked: 2026-11-25

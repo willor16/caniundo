@@ -1,0 +1,20 @@
+id: mongo-drop
+tool: mongodb
+example: mongosh --eval "db.dropDatabase()"
+title:
+  en: Delete a database in MongoDB
+  es: Borrar una base de datos en MongoDB
+match:
+  - run: [mongosh, mongo]
+    operands: { any: ["*.dropdatabase(*"] }
+verdict: "no"
+loses:
+  en: The database and its files.
+  es: La base de datos y sus archivos.
+before:
+  note:
+    en: Make a copy with mongodump, and check that it restores.
+    es: Haz una copia con mongodump y comprueba que se restaura.
+sources:
+  - https://www.mongodb.com/docs/manual/reference/method/db.dropdatabase/
+checked: 2026-11-25

@@ -1,0 +1,29 @@
+id: kubectl-delete
+tool: kubernetes
+example: kubectl delete deployment shop
+title:
+  en: Delete an object from a cluster
+  es: Borrar un objeto de un clúster
+match:
+  - run: [kubectl delete, oc delete]
+    without: [--dry-run]
+verdict: partly
+loses:
+  en: Whatever is only in the cluster. If it owns volumes, maybe their data too.
+  es: Lo que solo estaba en el clúster. Si es dueño de volúmenes, quizá también sus datos.
+keeps:
+  en: The manifest, if you have it in a file.
+  es: El manifiesto, si lo tienes en un archivo.
+before:
+  note:
+    en: "Save it: kubectl get <kind> <name> --output yaml"
+    es: "Guárdalo: kubectl get <kind> <name> --output yaml"
+recover:
+  - id: apply
+    gives:
+      en: The object, as it is in its manifest.
+      es: El objeto, como está en su manifiesto.
+    run: [kubectl apply --filename <manifest>]
+sources:
+  - https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/
+checked: 2026-11-25

@@ -1,0 +1,52 @@
+id: rm-build-output
+tool: files
+example: rm -rf dist
+title:
+  en: Delete the result of a build
+  es: Borrar el resultado de una compilación
+match:
+  - run: rm
+    operands:
+      every: [dist, "*/dist", "dist/*", build, "*/build", "build/*", out, "*/out", "out/*", target, "*/target", "target/*", coverage, "*/coverage", "coverage/*", .next, "*/.next", ".next/*", .nuxt, "*/.nuxt", .turbo, "*/.turbo", .svelte-kit, "*/.svelte-kit", .parcel-cache, "*/.parcel-cache"]
+      none: ["/*", "~*", "*..*", "*:*"]
+  - run: [rimraf, del-cli]
+    operands:
+      every: [dist, "*/dist", "dist/*", build, "*/build", "build/*", out, "*/out", "out/*", target, "*/target", "target/*", coverage, "*/coverage", "coverage/*", .next, "*/.next", ".next/*", .nuxt, "*/.nuxt", .turbo, "*/.turbo", .svelte-kit, "*/.svelte-kit", .parcel-cache, "*/.parcel-cache"]
+      none: ["/*", "~*", "*..*", "*:*"]
+  - run: remove-item
+    operands:
+      every: [dist, "*/dist", "dist/*", build, "*/build", "build/*", out, "*/out", "out/*", target, "*/target", "target/*", coverage, "*/coverage", "coverage/*", .next, "*/.next", ".next/*", .nuxt, "*/.nuxt", .turbo, "*/.turbo", .svelte-kit, "*/.svelte-kit", .parcel-cache, "*/.parcel-cache"]
+      none: ["/*", "~*", "*..*", "*:*"]
+overrides: [rm, remove-item]
+verdict: partly
+interrupt: false
+loses:
+  en: Anything in there that was put by hand.
+  es: Lo que alguien haya puesto ahí a mano.
+keeps:
+  en: What the build makes.
+  es: Lo que genera la compilación.
+recover:
+  - id: build
+    gives:
+      en: The result of the build. Use the command of your project.
+      es: El resultado de la compilación. Usa el comando de tu proyecto.
+    run: [npm run build]
+proof:
+  lab: npm
+  cases:
+    - shows: restored
+      recipe: build
+      setup: |
+        mkdir dist; echo built > dist/app.js
+        echo '{"name":"p","version":"1.0.0","scripts":{"build":"node build.cjs"}}' > package.json
+        echo "require('fs').mkdirSync('dist');require('fs').writeFileSync('dist/app.js','built')" > build.cjs
+      run: rm -rf dist
+      check: test "$(cat dist/app.js)" = built
+    - shows: lost
+      setup: |
+        mkdir dist; echo built > dist/app.js; echo mine > dist/notes.txt
+        echo '{"name":"p","version":"1.0.0","scripts":{"build":"node build.cjs"}}' > package.json
+        echo "require('fs').mkdirSync('dist');require('fs').writeFileSync('dist/app.js','built')" > build.cjs
+      run: rm -rf dist; npm run build
+      check: test -e dist/notes.txt

@@ -1,0 +1,24 @@
+id: terraform-state-rm
+tool: terraform
+example: terraform state rm aws_instance.web
+title:
+  en: Make Terraform forget something
+  es: Hacer que Terraform olvide algo
+match:
+  - run: [terraform state rm, tofu state rm]
+    without: [-dry-run|--dry-run]
+verdict: "yes"
+interrupt: true
+loses:
+  en: Only the link. The real thing keeps running, and the next plan would create another one.
+  es: Solo el vínculo. Lo real sigue funcionando, y el próximo plan crearía otro.
+recover:
+  - id: import
+    gives:
+      en: The link.
+      es: El vínculo.
+    run: [terraform import <address> <id>]
+sources:
+  - https://developer.hashicorp.com/terraform/cli/commands/state/rm
+  - https://developer.hashicorp.com/terraform/cli/commands/import
+checked: 2026-11-25

@@ -1,0 +1,32 @@
+id: sqlite-update-all
+tool: sqlite
+example: sqlite3 app.db "UPDATE users SET active = 0"
+title:
+  en: Change every row of a table in SQLite
+  es: Cambiar todas las filas de una tabla en SQLite
+match:
+  - sql: UPDATE ... SET
+    dialects: [sqlite]
+    everyRow: true
+verdict: "no"
+loses:
+  en: The old values of those columns, in every row.
+  es: Los valores anteriores de esas columnas, en todas las filas.
+before:
+  note:
+    en: Close the programs that use the database and copy the file.
+    es: Cierra los programas que usan la base y copia el archivo.
+  run: [cp <database> <copy>]
+  back: [cp <copy> <database>]
+proof:
+  lab: sqlite
+  cases:
+    - shows: before
+      setup: sqlite3 app.db "create table users(n)"; sqlite3 app.db "insert into users values (1)"
+      run: sqlite3 app.db "UPDATE users SET n = 0"
+      check: sqlite3 app.db "select n from users" | grep -q 1
+      fill: { database: app.db, copy: app.bak }
+    - shows: lost
+      setup: sqlite3 app.db "create table users(n)"; sqlite3 app.db "insert into users values (1)"
+      run: sqlite3 app.db "UPDATE users SET n = 0"
+      check: sqlite3 app.db "select n from users" | grep -q 1

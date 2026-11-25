@@ -1,0 +1,24 @@
+id: gcloud-project-delete
+tool: gcloud
+example: gcloud projects delete my-shop
+title:
+  en: Delete a Google Cloud project
+  es: Borrar un proyecto de Google Cloud
+match:
+  - run: gcloud projects delete
+verdict: partly
+loses:
+  en: Some data may go before the 30 days, such as Cloud Storage buckets without soft delete. Billing has to be turned on again.
+  es: Algunos datos pueden irse antes de los 30 días, como los buckets sin borrado suave. Hay que volver a activar la facturación.
+recover:
+  - id: undelete
+    gives:
+      en: The project.
+      es: El proyecto.
+    run: [gcloud projects undelete <project>]
+    until:
+      en: 30 days.
+      es: 30 días.
+sources:
+  - https://docs.cloud.google.com/resource-manager/docs/delete-restore-projects
+checked: 2026-11-25

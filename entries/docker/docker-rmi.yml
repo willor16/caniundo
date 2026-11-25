@@ -1,0 +1,25 @@
+id: docker-rmi
+tool: docker
+example: docker rmi shop:1.0
+title:
+  en: Delete an image
+  es: Borrar una imagen
+match:
+  - run: [docker rmi, docker image rm, docker image remove, docker image prune, podman rmi, podman image rm, podman image prune]
+verdict: partly
+interrupt: false
+loses:
+  en: Images that were built here and never pushed. They have to be built again.
+  es: Las imágenes creadas aquí que nunca se subieron. Hay que volver a crearlas.
+keeps:
+  en: The copies in a registry.
+  es: Las copias en un registro.
+recover:
+  - id: pull
+    gives:
+      en: The image, if it exists in a registry.
+      es: La imagen, si existe en un registro.
+    run: [docker pull <image>]
+sources:
+  - https://docs.docker.com/reference/cli/docker/image/rm/
+checked: 2026-11-25

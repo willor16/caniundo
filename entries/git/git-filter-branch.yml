@@ -1,0 +1,34 @@
+id: git-filter-branch
+tool: git
+example: git filter-branch --tree-filter "rm -f secret.txt" HEAD
+title:
+  en: Rewrite all the history
+  es: Reescribir todo el historial
+match:
+  - run: git filter-branch
+verdict: "yes"
+interrupt: true
+loses:
+  en: Nothing yet. Git keeps the old history under refs/original.
+  es: Nada todavía. Git conserva el historial viejo en refs/original.
+recover:
+  - id: original
+    gives:
+      en: The branch with its old history.
+      es: La rama con su historial viejo.
+    run: [git reset --keep refs/original/refs/heads/<branch>]
+    until:
+      en: Until refs/original is deleted or another filter-branch replaces it.
+      es: Hasta que se borre refs/original o lo reemplace otro filter-branch.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: original
+      setup: |
+        git init -q
+        echo one > a.txt; echo secret > s.txt; git add .; git commit -qm one
+        git rev-parse HEAD > "$HOME/tip"
+      run: FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --index-filter "git rm -q --cached --ignore-unmatch s.txt" HEAD
+      check: test "$(git rev-parse HEAD)" = "$(cat "$HOME/tip")" && test -e s.txt
+      fill: { branch: main }

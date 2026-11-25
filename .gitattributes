@@ -1,0 +1,3 @@
+* text=auto eol=lf
+dist/caniundo.js linguist-generated -diff
+evidence.json linguist-generated

@@ -1,0 +1,42 @@
+id: git-checkout-files
+tool: git
+example: git checkout -- src/app.js
+title:
+  en: Replace files with an older version
+  es: Reemplazar archivos con una versión anterior
+match:
+  - run: git checkout
+    without: [-b, -B]
+    operands: { afterDashes: true }
+  - run: git checkout
+    without: [-b, -B]
+    operands:
+      any: [".", "./*", "../*", ":/", "*.js", "*.ts", "*.jsx", "*.tsx", "*.mjs", "*.cjs", "*.py", "*.go", "*.rs", "*.java", "*.kt", "*.swift", "*.c", "*.h", "*.cc", "*.cpp", "*.hpp", "*.cs", "*.rb", "*.php", "*.vue", "*.svelte", "*.html", "*.css", "*.scss", "*.json", "*.yml", "*.yaml", "*.toml", "*.xml", "*.md", "*.txt", "*.sh", "*.ps1", "*.sql", "*.lock", "*.env", "*/Makefile", "Makefile", "Dockerfile"]
+verdict: "no"
+loses:
+  en: The changes in those files that were not staged or committed.
+  es: Los cambios de esos archivos que no se prepararon ni se confirmaron.
+instead:
+  note:
+    en: Put them away instead of discarding them.
+    es: Guárdalos en lugar de descartarlos.
+  run: [git stash push -- <file>]
+  back: [git stash pop]
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git checkout -- a.txt
+      check: test "$(cat a.txt)" = edited
+      fill: { file: a.txt }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git checkout .
+      check: test "$(cat a.txt)" = edited

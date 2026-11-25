@@ -1,0 +1,46 @@
+id: git-unstage
+tool: git
+example: git restore --staged src/app.js
+title:
+  en: Take files out of the next commit
+  es: Sacar archivos del próximo commit
+match:
+  - run: git restore
+    with: [-S|--staged]
+    without: [-W|--worktree]
+  - run: git reset
+    without: [--hard, --soft, --keep, --merge]
+    operands: { afterDashes: true }
+verdict: partly
+interrupt: false
+loses:
+  en: The staged version, if you edited the file after staging it.
+  es: La versión preparada, si editaste el archivo después de prepararla.
+keeps:
+  en: The file in your folder.
+  es: El archivo en tu carpeta.
+recover:
+  - id: add
+    gives:
+      en: The file in the next commit, as it is now.
+      es: El archivo en el próximo commit, como está ahora.
+    run: [git add <file>]
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: add
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > a.txt; git add a.txt
+      run: git restore --staged a.txt
+      check: test "$(git show :a.txt)" = two
+      fill: { file: a.txt }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > a.txt; git add a.txt; echo three > a.txt
+      run: git restore --staged a.txt; git add a.txt
+      check: test "$(git show :a.txt)" = two

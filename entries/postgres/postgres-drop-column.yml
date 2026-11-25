@@ -1,0 +1,31 @@
+id: postgres-drop-column
+tool: postgres
+example: psql -c "ALTER TABLE users DROP COLUMN email"
+title:
+  en: Delete a column in PostgreSQL
+  es: Borrar una columna en PostgreSQL
+match:
+  - sql: ALTER TABLE ... DROP COLUMN
+    dialects: [postgres]
+verdict: "no"
+loses:
+  en: The values of that column, in every row. Adding it again leaves it empty.
+  es: Los valores de esa columna, en todas las filas. Al crearla de nuevo queda vacía.
+instead:
+  note:
+    en: Rename it first, and delete it when nothing needs it.
+    es: Renómbrala primero y bórrala cuando nada la necesite.
+  run: ['psql -c "ALTER TABLE <table> RENAME COLUMN <column> TO <old-column>"']
+  back: ['psql -c "ALTER TABLE <table> RENAME COLUMN <old-column> TO <column>"']
+proof:
+  lab: postgres
+  cases:
+    - shows: instead
+      setup: psql -c "create table users(n int, email text)" -c "insert into users values (1, 'a')"
+      run: psql -c "ALTER TABLE users DROP COLUMN email"
+      check: test "$(psql -At -c "select email from users")" = a
+      fill: { table: users, column: email, old-column: email_old }
+    - shows: lost
+      setup: psql -c "create table users(n int, email text)" -c "insert into users values (1, 'a')"
+      run: psql -c "ALTER TABLE users DROP COLUMN email" -c "alter table users add column email text"
+      check: test "$(psql -At -c "select email from users")" = a

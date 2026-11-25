@@ -1,0 +1,22 @@
+id: cargo-yank
+tool: cargo
+example: cargo yank --version 1.0.0 my-crate
+title:
+  en: Stop new uses of a crate version
+  es: Frenar nuevos usos de una versión de un crate
+match:
+  - run: cargo yank
+    without: [--undo]
+verdict: "yes"
+loses:
+  en: Nothing. The code stays available for whoever already uses it.
+  es: Nada. El código sigue disponible para quien ya lo usa.
+recover:
+  - id: undo
+    gives:
+      en: The version, as before.
+      es: La versión, como antes.
+    run: [cargo yank --undo --version <version> <crate>]
+sources:
+  - https://doc.rust-lang.org/cargo/commands/cargo-yank.html
+checked: 2026-11-25

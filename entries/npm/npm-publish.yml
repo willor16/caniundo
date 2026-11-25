@@ -1,0 +1,32 @@
+id: npm-publish
+tool: npm
+example: npm publish
+title:
+  en: Publish a package on npm
+  es: Publicar un paquete en npm
+match:
+  - run: [npm publish, pnpm publish, yarn publish, yarn npm publish, bun publish]
+    without: [--dry-run]
+verdict: partly
+loses:
+  en: That version number, forever. Whoever installed it keeps it.
+  es: Ese número de versión, para siempre. Quien lo instaló se queda con él.
+instead:
+  note:
+    en: "See what it would publish: npm publish --dry-run"
+    es: "Mira qué publicaría: npm publish --dry-run"
+recover:
+  - id: unpublish
+    gives:
+      en: Takes that version off the registry, if no other package depends on it.
+      es: Quita esa versión del registro, si ningún otro paquete depende de ella.
+    run: [npm unpublish <package>@<version>]
+    until:
+      en: 72 hours. After that there are more conditions.
+      es: 72 horas. Después hay más condiciones.
+    risk:
+      en: That version number can never be used again.
+      es: Ese número de versión no se puede volver a usar.
+sources:
+  - https://docs.npmjs.com/policies/unpublish/
+checked: 2026-11-25

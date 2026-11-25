@@ -1,0 +1,37 @@
+id: git-clean
+tool: git
+example: git clean -fd
+title:
+  en: Delete files that git does not track
+  es: Borrar archivos que git no sigue
+match:
+  - run: git clean
+    with: [-f|--force]
+    without: [-n|--dry-run]
+verdict: "no"
+loses:
+  en: The files git does not track. With -x, also the ignored ones, such as .env.
+  es: Los archivos que git no sigue. Con -x, también los ignorados, como .env.
+instead:
+  note:
+    en: Put them away instead. Add --all if you were going to use -x.
+    es: Guárdalos en su lugar. Agrega --all si ibas a usar -x.
+  run: [git stash push --include-untracked]
+  back: [git stash pop]
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo new > b.txt
+      run: git clean -f
+      check: test "$(cat b.txt)" = new
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; echo .env > .gitignore; git add .; git commit -qm one
+        echo new > b.txt; echo KEY=1 > .env
+      run: git clean -fdx
+      check: test -e b.txt || test -e .env || git fsck --lost-found | grep -q blob

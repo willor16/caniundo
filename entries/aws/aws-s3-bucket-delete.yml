@@ -1,0 +1,15 @@
+id: aws-s3-bucket-delete
+tool: aws
+example: aws s3 rb s3://shop-photos --force
+title:
+  en: Delete an S3 bucket
+  es: Borrar un bucket de S3
+match:
+  - run: [aws s3 rb, aws s3api delete-bucket]
+verdict: "no"
+loses:
+  en: The bucket, and with --force its objects. Another account can take its name.
+  es: El bucket y, con --force, sus objetos. Otra cuenta puede quedarse con su nombre.
+sources:
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html
+checked: 2026-11-25

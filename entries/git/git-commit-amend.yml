@@ -1,0 +1,37 @@
+id: git-commit-amend
+tool: git
+example: git commit --amend
+title:
+  en: Replace the last commit
+  es: Reemplazar el último commit
+match:
+  - run: git commit
+    with: [--amend]
+    without: [--dry-run]
+verdict: "yes"
+loses:
+  en: Nothing. The old commit stays outside the branch.
+  es: Nada. El commit viejo queda fuera de la rama.
+recover:
+  - id: previous
+    gives:
+      en: The commit as it was. What you added stays staged.
+      es: El commit como estaba. Lo que agregaste queda preparado.
+    run: ["git reset --soft HEAD@{1}"]
+    until:
+      en: 30 days by default. The 1 means one move ago, so check git reflog if you did something else after.
+      es: 30 días por defecto. El 1 significa un movimiento atrás, así que mira git reflog si hiciste algo más después.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > b.txt; git add b.txt
+      run: git commit -q --amend -m changed
+      check: test "$(git log -1 --format=%s)" = one && test "$(git diff --cached --name-only)" = b.txt

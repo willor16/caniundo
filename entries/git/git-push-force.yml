@@ -1,0 +1,62 @@
+id: git-push-force
+tool: git
+example: git push --force
+title:
+  en: Replace a branch on the server
+  es: Reemplazar una rama en el servidor
+match:
+  - run: git push
+    with: [-f|--force]
+  - run: git push
+    operands: { any: ["+*"] }
+  - run: git push
+    with: [--mirror]
+verdict: partly
+loses:
+  en: The commits on the server that you never downloaded, such as someone else's.
+  es: Los commits del servidor que nunca descargaste, como los de otra persona.
+keeps:
+  en: The commits that you had downloaded.
+  es: Los commits que ya habías descargado.
+instead:
+  note:
+    en: "git push --force-with-lease refuses when the server has commits you have not seen."
+    es: "git push --force-with-lease se niega si el servidor tiene commits que no has visto."
+recover:
+  - id: previous
+    gives:
+      en: The branch as it was on the server the last time you downloaded it.
+      es: La rama tal como estaba en el servidor la última vez que la descargaste.
+    run:
+      - git reflog show origin/<branch>
+      - "git push --force-with-lease origin origin/<branch>@{1}:refs/heads/<branch>"
+    until:
+      en: 30 days by default, in this copy. The 1 means one move ago.
+      es: 30 días por defecto, en esta copia. El 1 significa un movimiento atrás.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q --bare ../server.git
+        git clone -q ../server.git . 2>/dev/null
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > a.txt; git commit -qam two; git push -q origin main
+        git reset -q --hard HEAD~1; echo three > a.txt; git commit -qam three
+      run: git push --force origin main
+      check: git -C ../server.git log --format=%s main | grep -qx two
+      fill: { branch: main }
+    - shows: lost
+      setup: |
+        git init -q --bare ../server.git
+        git clone -q ../server.git . 2>/dev/null
+        echo one > a.txt; git add a.txt; git commit -qm one; git push -q origin main
+        git clone -q ../server.git ../theirs; cd ../theirs
+        echo theirs > b.txt; git add b.txt; git commit -qm theirs; git push -q origin main
+        cd ../work; git commit -q --amend -m again
+      run: git push --force origin main
+      check: git -C ../server.git log --format=%s main | grep -qx theirs || git log --all --reflog --format=%s | grep -qx theirs

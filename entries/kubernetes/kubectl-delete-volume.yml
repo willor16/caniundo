@@ -1,0 +1,24 @@
+id: kubectl-delete-volume
+tool: kubernetes
+example: kubectl delete pvc shop-data
+title:
+  en: Delete a volume from a cluster
+  es: Borrar un volumen de un clúster
+match:
+  - run: [kubectl delete pvc, kubectl delete persistentvolumeclaim, kubectl delete persistentvolumeclaims, kubectl delete pv, kubectl delete persistentvolume, kubectl delete persistentvolumes]
+    without: [--dry-run]
+  - run: kubectl delete
+    without: [--dry-run]
+    operands: { any: ["pvc/*", "persistentvolumeclaim/*", "pv/*", "persistentvolume/*"] }
+overrides: [kubectl-delete]
+verdict: "no"
+loses:
+  en: The disk and its data, with the usual reclaim policy, which is Delete.
+  es: El disco y sus datos, con la política habitual, que es Delete.
+before:
+  note:
+    en: Change the reclaim policy of the volume to Retain, and take a snapshot.
+    es: Cambia la política del volumen a Retain y toma una instantánea.
+sources:
+  - https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+checked: 2026-11-25

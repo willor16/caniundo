@@ -1,0 +1,31 @@
+id: find-delete
+tool: files
+example: find . -name "*.log" -delete
+title:
+  en: Delete everything a search finds
+  es: Borrar todo lo que encuentra una búsqueda
+match:
+  - run: find
+    with: [-delete]
+verdict: "no"
+loses:
+  en: The files it finds. They do not go to the trash.
+  es: Los archivos que encuentra. No van a la papelera.
+instead:
+  note:
+    en: "Look at the list first: the same search with -print."
+    es: "Mira primero la lista: la misma búsqueda con -print."
+  run: [find . -name <pattern> -print]
+  back: []
+proof:
+  lab: files
+  cases:
+    - shows: instead
+      setup: echo one > a.log; echo two > b.log
+      run: find . -name "*.log" -delete
+      check: test -e a.log && test -e b.log
+      fill: { pattern: "'*.log'" }
+    - shows: lost
+      setup: echo one > a.log; echo two > b.log
+      run: find . -name "*.log" -delete
+      check: test -e a.log || test -e b.log

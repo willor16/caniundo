@@ -1,0 +1,40 @@
+id: git-push-lease
+tool: git
+example: git push --force-with-lease
+title:
+  en: Replace a branch on the server, if nobody else changed it
+  es: Reemplazar una rama en el servidor, si nadie más la cambió
+match:
+  - run: git push
+    with: [--force-with-lease]
+    without: [-f|--force]
+verdict: "yes"
+loses:
+  en: The old commits leave the branch. You have them, because git checks that you had seen them.
+  es: Los commits viejos salen de la rama. Tú los tienes, porque git comprueba que los habías visto.
+recover:
+  - id: previous
+    gives:
+      en: The branch as it was on the server.
+      es: La rama tal como estaba en el servidor.
+    run: ["git push --force-with-lease origin origin/<branch>@{1}:refs/heads/<branch>"]
+    until:
+      en: 30 days by default, in this copy. The 1 means one move ago.
+      es: 30 días por defecto, en esta copia. El 1 significa un movimiento atrás.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q --bare ../server.git
+        git clone -q ../server.git . 2>/dev/null
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > a.txt; git commit -qam two; git push -q origin main
+        git reset -q --hard HEAD~1; echo three > a.txt; git commit -qam three
+      run: git push --force-with-lease origin main
+      check: git -C ../server.git log --format=%s main | grep -qx two
+      fill: { branch: main }

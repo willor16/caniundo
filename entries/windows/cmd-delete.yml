@@ -1,0 +1,22 @@
+id: cmd-delete
+tool: windows
+example: cmd /c "rd /s /q folder"
+title:
+  en: Delete files in the Windows command prompt
+  es: Borrar archivos en el símbolo del sistema de Windows
+match:
+  - run: [rd, rmdir]
+    with: [/s|/S]
+  - run: [del, erase]
+verdict: "no"
+loses:
+  en: The files. They do not go to the Recycle Bin.
+  es: Los archivos. No van a la Papelera de reciclaje.
+proof:
+  lab: powershell
+  platforms: [win32]
+  cases:
+    - shows: lost
+      setup: New-Item -ItemType Directory folder | Out-Null; Set-Content folder/a.txt one
+      run: cmd /c "rd /s /q folder"
+      check: if (-not (Test-Path folder/a.txt)) { exit 1 }

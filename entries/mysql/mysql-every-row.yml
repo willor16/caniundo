@@ -1,0 +1,21 @@
+id: mysql-every-row
+tool: mysql
+example: mysql -e "DELETE FROM users" shop
+title:
+  en: Delete or change every row in MySQL
+  es: Borrar o cambiar todas las filas en MySQL
+match:
+  - sql: [DELETE FROM, UPDATE ... SET]
+    dialects: [mysql]
+    everyRow: true
+verdict: "no"
+loses:
+  en: Every row, or its old values, because there is no WHERE. MySQL commits each statement unless you open a transaction.
+  es: Todas las filas, o sus valores anteriores, porque no hay WHERE. MySQL confirma cada sentencia salvo que abras una transacción.
+instead:
+  note:
+    en: With InnoDB tables, try it between START TRANSACTION and ROLLBACK.
+    es: Con tablas InnoDB, pruébalo entre START TRANSACTION y ROLLBACK.
+sources:
+  - https://dev.mysql.com/doc/refman/8.4/en/commit.html
+checked: 2026-11-25

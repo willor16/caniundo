@@ -1,0 +1,52 @@
+{
+  "name": "caniundo",
+  "version": "0.1.0",
+  "description": "Can I undo this? Find out before you run a command, and how to get back after.",
+  "keywords": [
+    "undo",
+    "cli",
+    "safety",
+    "claude-code",
+    "claude-code-plugin",
+    "ai-agents",
+    "git",
+    "docker",
+    "postgres",
+    "recovery"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "caniundo": "dist/caniundo.js"
+  },
+  "files": [
+    "dist/caniundo.js",
+    "README.md",
+    "README.es.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willor16/caniundo.git"
+  },
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"test/*.test.ts\"",
+    "prove": "node scripts/prove.ts",
+    "evidence": "node scripts/evidence.ts",
+    "demo": "node scripts/demo.ts",
+    "site": "node scripts/site.ts",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.3.14",
+    "@types/node": "^24.0.0",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "yaml": "2.9.1"
+  }
+}

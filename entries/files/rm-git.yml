@@ -1,0 +1,34 @@
+id: rm-git
+tool: files
+example: rm -rf .git
+title:
+  en: Delete a git repository
+  es: Borrar un repositorio de git
+match:
+  - run: rm
+    operands: { any: [".git", "*/.git"] }
+  - run: remove-item
+    operands: { any: [".git", "*/.git"] }
+overrides: [rm, remove-item]
+verdict: "no"
+loses:
+  en: The whole history, the branches and the stashes that were not on a server.
+  es: Todo el historial, las ramas y los stash que no estaban en un servidor.
+instead:
+  note:
+    en: Move it out of the way.
+    es: Quítalo de en medio sin borrarlo.
+  run: [mv .git <elsewhere>]
+  back: [mv <elsewhere> .git]
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: git init -q; echo one > a.txt; git add a.txt; git commit -qm one
+      run: rm -rf .git
+      check: test "$(git log -1 --format=%s 2>/dev/null)" = one
+      fill: { elsewhere: ../kept.git }
+    - shows: lost
+      setup: git init -q; echo one > a.txt; git add a.txt; git commit -qm one
+      run: rm -rf .git
+      check: git log -1

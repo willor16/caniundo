@@ -1,0 +1,32 @@
+id: sqlite-delete-all
+tool: sqlite
+example: sqlite3 app.db "DELETE FROM users"
+title:
+  en: Delete every row of a table in SQLite
+  es: Borrar todas las filas de una tabla en SQLite
+match:
+  - sql: DELETE FROM
+    dialects: [sqlite]
+    everyRow: true
+verdict: "no"
+loses:
+  en: Every row of the table.
+  es: Todas las filas de la tabla.
+before:
+  note:
+    en: Close the programs that use the database and copy the file.
+    es: Cierra los programas que usan la base y copia el archivo.
+  run: [cp <database> <copy>]
+  back: [cp <copy> <database>]
+proof:
+  lab: sqlite
+  cases:
+    - shows: before
+      setup: sqlite3 app.db "create table users(n)"; sqlite3 app.db "insert into users values (1)"
+      run: sqlite3 app.db "DELETE FROM users"
+      check: sqlite3 app.db "select n from users" | grep -q 1
+      fill: { database: app.db, copy: app.bak }
+    - shows: lost
+      setup: sqlite3 app.db "create table users(n)"; sqlite3 app.db "insert into users values (1)"
+      run: sqlite3 app.db "DELETE FROM users"
+      check: sqlite3 app.db "select n from users" | grep -q 1

@@ -1,0 +1,36 @@
+id: sed-in-place
+tool: files
+example: sed -i "s/old/new/g" config.txt
+title:
+  en: Edit files in place
+  es: Editar archivos directamente
+match:
+  - run: [sed, gsed]
+    with: [-i|--in-place]
+    without: [-i.bak|-i.orig|-i.old|-i~|--in-place=.bak|--in-place=.orig]
+  - run: perl
+    with: [-i]
+    without: [-i.bak|-i.orig]
+verdict: "no"
+interrupt: false
+loses:
+  en: The text that was replaced. Running the opposite also changes what was already like that.
+  es: El texto reemplazado. Hacer lo contrario también cambia lo que ya estaba así.
+instead:
+  note:
+    en: Ask sed to keep a copy.
+    es: Pide a sed que guarde una copia.
+  run: [sed -i.bak <change> <file>]
+  back: [mv <file>.bak <file>]
+proof:
+  lab: files
+  cases:
+    - shows: instead
+      setup: printf 'old\nnew\n' > a.txt
+      run: sed -i "s/old/new/" a.txt
+      check: test "$(tr '\n' ' ' < a.txt)" = "old new "
+      fill: { change: s/old/new/, file: a.txt }
+    - shows: lost
+      setup: printf 'old\nnew\n' > a.txt
+      run: sed -i.tmp "s/old/new/" a.txt; rm a.txt.tmp; sed -i.tmp "s/new/old/" a.txt
+      check: test "$(tr '\n' ' ' < a.txt)" = "old new "

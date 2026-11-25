@@ -1,0 +1,27 @@
+{
+  "name": "caniundo",
+  "displayName": "Can I undo?",
+  "version": "0.1.0",
+  "description": "Tells you what a command would destroy before Claude runs it, and how to get it back after.",
+  "author": { "name": "willor16", "url": "https://github.com/willor16" },
+  "homepage": "https://github.com/willor16/caniundo",
+  "repository": "https://github.com/willor16/caniundo",
+  "license": "MIT",
+  "keywords": ["undo", "safety", "recovery", "git", "docker", "sql"],
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "title": "What to do with a command that cannot be undone",
+      "description": "ask: you decide. steer: Claude is stopped and told a safer way. note: nobody is stopped.",
+      "options": ["ask", "steer", "note"],
+      "default": "ask"
+    },
+    "language": {
+      "type": "string",
+      "title": "Language",
+      "description": "auto uses the language of your system.",
+      "options": ["auto", "en", "es"],
+      "default": "auto"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+id: git-stash-clear
+tool: git
+example: git stash clear
+title:
+  en: Delete every stash
+  es: Borrar todos los stash
+match:
+  - run: git stash clear
+verdict: "yes"
+interrupt: true
+loses:
+  en: The list of stashes. Git keeps them for a while, but without names or order.
+  es: La lista de stash. Git los conserva un tiempo, pero sin nombre ni orden.
+recover:
+  - id: apply
+    gives:
+      en: Each stash, one at a time. They are commits in the first list, and their message usually starts with "WIP on".
+      es: Cada stash, uno por uno. Son commits de la primera lista, y su mensaje suele empezar por «WIP on».
+    run:
+      - git fsck --unreachable --no-reflogs
+      - git stash store <hash>
+    until:
+      en: Until git cleans up, 2 weeks by default.
+      es: Hasta que git haga limpieza, 2 semanas por defecto.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: apply
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt; git stash -q
+      run: git stash clear
+      check: test -n "$(git stash list)" && git stash show -p | grep -q edited
+      fill:
+        hash: $(git fsck --unreachable --no-reflogs 2>/dev/null | awk '/ commit /{print $3}' | xargs -n 1 git log -1 --format='%H %s' | awk '/ WIP on /{print $1}')

@@ -1,0 +1,22 @@
+id: mkfs
+tool: system
+example: mkfs.ext4 /dev/sdb1
+title:
+  en: Format a disk
+  es: Formatear un disco
+match:
+  - run: [mkfs, mke2fs, mkfs.ext2, mkfs.ext3, mkfs.ext4, mkfs.xfs, mkfs.btrfs, mkfs.fat, mkfs.vfat, mkfs.ntfs, mkfs.exfat, mkswap]
+    without: [-n]
+  - run: wipefs
+    with: [-a|--all]
+verdict: "no"
+loses:
+  en: The files on that disk. The new file system replaces the old one.
+  es: Los archivos de ese disco. El nuevo sistema de archivos reemplaza al anterior.
+before:
+  note:
+    en: Check the device with lsblk. mke2fs -n shows what it would do.
+    es: Revisa el dispositivo con lsblk. mke2fs -n muestra lo que haría.
+sources:
+  - https://man7.org/linux/man-pages/man8/mke2fs.8.html
+checked: 2026-11-25

@@ -1,0 +1,33 @@
+id: git-rm
+tool: git
+example: git rm old.txt
+title:
+  en: Delete a file and stage its deletion
+  es: Borrar un archivo y preparar su borrado
+match:
+  - run: git rm
+    without: [-f|--force, --cached, -n|--dry-run]
+verdict: "yes"
+loses:
+  en: Nothing. Git refuses when the file has changes that were not committed.
+  es: Nada. Git se niega si el archivo tiene cambios sin confirmar.
+recover:
+  - id: restore
+    gives:
+      en: The file, as in the last commit.
+      es: El archivo, como en el último commit.
+    run: [git restore --staged --worktree -- <file>]
+    risk:
+      en: Replaces a new file with the same name.
+      es: Reemplaza un archivo nuevo con el mismo nombre.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: restore
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+      run: git rm -q a.txt
+      check: test "$(cat a.txt)" = one && git ls-files --error-unmatch a.txt
+      fill: { file: a.txt }

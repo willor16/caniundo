@@ -1,0 +1,40 @@
+id: mv
+tool: files
+example: mv draft.txt final.txt
+title:
+  en: Move or rename a file
+  es: Mover o renombrar un archivo
+match:
+  - run: mv
+    without: [-n|--no-clobber, -i|--interactive, -b|--backup]
+verdict: partly
+interrupt: false
+loses:
+  en: The file that was already there with the new name, if there was one.
+  es: El archivo que ya tenía el nombre nuevo, si había uno.
+keeps:
+  en: The file that you moved.
+  es: El archivo que moviste.
+instead:
+  note:
+    en: mv -n never replaces a file.
+    es: mv -n nunca reemplaza un archivo.
+recover:
+  - id: back
+    gives:
+      en: The old name.
+      es: El nombre viejo.
+    run: [mv <new> <old>]
+proof:
+  lab: files
+  cases:
+    - shows: restored
+      recipe: back
+      setup: echo one > a.txt
+      run: mv a.txt b.txt
+      check: test "$(cat a.txt)" = one
+      fill: { new: b.txt, old: a.txt }
+    - shows: lost
+      setup: echo one > a.txt; echo two > b.txt
+      run: mv -f a.txt b.txt; mv b.txt a.txt
+      check: test "$(cat b.txt)" = two

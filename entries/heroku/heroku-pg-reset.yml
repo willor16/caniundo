@@ -1,0 +1,19 @@
+id: heroku-pg-reset
+tool: heroku
+example: heroku pg:reset --app shop
+title:
+  en: Empty a Heroku database
+  es: Vaciar una base de datos de Heroku
+match:
+  - run: heroku pg:reset
+verdict: "no"
+loses:
+  en: All the data in the database.
+  es: Todos los datos de la base.
+before:
+  note:
+    en: "Make a copy: heroku pg:backups:capture"
+    es: "Haz una copia: heroku pg:backups:capture"
+sources:
+  - https://devcenter.heroku.com/articles/heroku-cli-commands
+checked: 2026-11-25

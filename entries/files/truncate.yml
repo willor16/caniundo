@@ -1,0 +1,31 @@
+id: truncate
+tool: files
+example: truncate -s 0 app.log
+title:
+  en: Empty a file
+  es: Vaciar un archivo
+match:
+  - run: [truncate, gtruncate]
+verdict: "no"
+loses:
+  en: What the file had.
+  es: Lo que tenía el archivo.
+before:
+  note:
+    en: Keep a copy.
+    es: Guarda una copia.
+  run: [cp <file> <copy>]
+  back: [cp <copy> <file>]
+proof:
+  lab: files
+  platforms: [linux, win32]
+  cases:
+    - shows: before
+      setup: echo one > a.txt
+      run: truncate -s 0 a.txt
+      check: test "$(cat a.txt)" = one
+      fill: { file: a.txt, copy: a.bak }
+    - shows: lost
+      setup: echo one > a.txt
+      run: truncate -s 0 a.txt
+      check: test "$(cat a.txt)" = one

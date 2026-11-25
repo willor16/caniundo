@@ -1,0 +1,34 @@
+id: remove-item
+tool: windows
+example: Remove-Item -Recurse folder
+title:
+  en: Delete files in PowerShell
+  es: Borrar archivos en PowerShell
+match:
+  - run: remove-item
+    without: [-WhatIf]
+verdict: "no"
+loses:
+  en: The files. They do not go to the Recycle Bin.
+  es: Los archivos. No van a la Papelera de reciclaje.
+instead:
+  note:
+    en: Move it somewhere else, and delete it when you are sure.
+    es: Muévelo a otro lugar y bórralo cuando estés seguro.
+  run: [Move-Item <path> <elsewhere>]
+  back: [Move-Item <elsewhere> <path>]
+sources:
+  - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item
+checked: 2026-11-25
+proof:
+  lab: powershell
+  cases:
+    - shows: instead
+      setup: New-Item -ItemType Directory folder | Out-Null; Set-Content folder/a.txt one
+      run: Remove-Item -Recurse folder
+      check: if ((Get-Content folder/a.txt) -ne 'one') { exit 1 }
+      fill: { path: folder, elsewhere: ../kept }
+    - shows: lost
+      setup: New-Item -ItemType Directory folder | Out-Null; Set-Content folder/a.txt one
+      run: Remove-Item -Recurse folder
+      check: if (-not (Test-Path folder/a.txt)) { exit 1 }

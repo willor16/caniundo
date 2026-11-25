@@ -1,0 +1,28 @@
+id: aws-dynamodb-delete
+tool: aws
+example: aws dynamodb delete-table --table-name orders
+title:
+  en: Delete a DynamoDB table
+  es: Borrar una tabla de DynamoDB
+match:
+  - run: aws dynamodb delete-table
+verdict: partly
+loses:
+  en: The table, if point-in-time recovery was off and there is no backup.
+  es: La tabla, si la recuperación a un punto en el tiempo estaba desactivada y no hay copia.
+keeps:
+  en: With that recovery on, a copy that AWS makes when the table is deleted.
+  es: Con esa recuperación activada, una copia que AWS hace al borrar la tabla.
+recover:
+  - id: backup
+    gives:
+      en: The table. Its alarms, policies and tags have to be set up again.
+      es: La tabla. Hay que volver a configurar sus alarmas, políticas y etiquetas.
+    run: [aws dynamodb restore-table-from-backup --target-table-name <table> --backup-arn <backup>]
+    until:
+      en: 35 days, for the copy that AWS makes.
+      es: 35 días, para la copia que hace AWS.
+sources:
+  - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PointInTimeRecovery_Howitworks.html
+  - https://docs.aws.amazon.com/cli/latest/reference/dynamodb/restore-table-from-backup.html
+checked: 2026-11-25

@@ -1,0 +1,16 @@
+id: clear-recyclebin
+tool: windows
+example: Clear-RecycleBin -Force
+title:
+  en: Empty the Recycle Bin
+  es: Vaciar la Papelera de reciclaje
+match:
+  - run: clear-recyclebin
+    without: [-WhatIf]
+verdict: "no"
+loses:
+  en: Everything in the Recycle Bin.
+  es: Todo lo que había en la Papelera.
+sources:
+  - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/clear-recyclebin
+checked: 2026-11-25

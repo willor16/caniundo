@@ -1,0 +1,40 @@
+id: aws-s3-delete
+tool: aws
+example: aws s3 rm s3://shop-photos --recursive
+title:
+  en: Delete objects from S3
+  es: Borrar objetos de S3
+match:
+  - run: aws s3 rm
+    without: [--dryrun]
+  - run: aws s3 sync
+    with: [--delete]
+    without: [--dryrun]
+  - run: [aws s3api delete-object, aws s3api delete-objects]
+verdict: partly
+loses:
+  en: The objects, forever, if the bucket has no versioning.
+  es: Los objetos, para siempre, si el bucket no tiene versiones.
+keeps:
+  en: The old versions, if versioning was on before.
+  es: Las versiones anteriores, si ya las tenía activadas.
+instead:
+  note:
+    en: Add --dryrun to see the list.
+    es: Agrega --dryrun para ver la lista.
+recover:
+  - id: versions
+    gives:
+      en: "With versioning on: each object, by deleting its delete marker. The first command lists them."
+      es: "Con versiones activadas: cada objeto, al borrar su marca de borrado. El primer comando las lista."
+    run:
+      - aws s3api list-object-versions --bucket <bucket> --prefix <key>
+      - aws s3api delete-object --bucket <bucket> --key <key> --version-id <delete-marker>
+    risk:
+      en: Deleting a version that is not the marker is permanent.
+      es: Borrar una versión que no sea la marca es permanente.
+sources:
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjects.html
+  - https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeleteMarker.html
+  - https://docs.aws.amazon.com/cli/latest/reference/s3/rm.html
+checked: 2026-11-25

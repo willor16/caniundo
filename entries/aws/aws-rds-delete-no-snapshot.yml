@@ -1,0 +1,24 @@
+id: aws-rds-delete-no-snapshot
+tool: aws
+example: aws rds delete-db-instance --db-instance-identifier shop --skip-final-snapshot
+title:
+  en: Delete a database in RDS without a last copy
+  es: Borrar una base de datos de RDS sin una última copia
+match:
+  - run: [aws rds delete-db-instance, aws rds delete-db-cluster]
+    with: [--skip-final-snapshot]
+overrides: [aws-rds-delete]
+verdict: "no"
+loses:
+  en: The data since the last manual snapshot, or all of it if there is none. Automated backups too, unless you choose to keep them.
+  es: Los datos desde la última instantánea manual, o todos si no hay. También las copias automáticas, salvo que elijas conservarlas.
+keeps:
+  en: Manual snapshots. AWS Support may be able to help within six days.
+  es: Las instantáneas manuales. El soporte de AWS quizá pueda ayudar en los primeros seis días.
+instead:
+  note:
+    en: Use --final-db-snapshot-identifier, so that a last copy stays.
+    es: Usa --final-db-snapshot-identifier, para que quede una última copia.
+sources:
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+checked: 2026-11-25

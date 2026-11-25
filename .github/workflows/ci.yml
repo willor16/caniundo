@@ -1,0 +1,71 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # New versions of the tools can change what is true.
+    - cron: "17 6 * * 1"
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - name: The committed program matches the source
+        if: runner.os == 'Linux'
+        run: git diff --exit-code -- dist/caniundo.js
+      - name: It works on the oldest supported Node
+        if: runner.os == 'Linux'
+        run: npx --yes node@20 dist/caniundo.js "git commit -m x"
+      - name: The website builds
+        if: runner.os == 'Linux'
+        run: npm run site
+
+  prove:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            labs: git,files,npm,sqlite,postgres,docker,powershell
+          - os: windows-latest
+            labs: git,files,npm,sqlite,postgres,powershell
+          - os: macos-latest
+            labs: git,files,npm,sqlite,postgres,powershell
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts
+      - name: Prove with the network off
+        if: runner.os == 'Linux'
+        run: |
+          sudo systemctl start postgresql
+          sudo -u postgres createuser --superuser "$USER"
+          docker pull --quiet busybox:1.37
+          sudo unshare --net sudo -u "$USER" env "PATH=$PATH" "HOME=$HOME" PGHOST=/var/run/postgresql node scripts/prove.ts --record --require ${{ matrix.labs }}
+      - name: Prove
+        if: runner.os != 'Linux'
+        run: node scripts/prove.ts --record --require ${{ matrix.labs }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: evidence-${{ matrix.os }}
+          path: evidence.json

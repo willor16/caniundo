@@ -1,0 +1,43 @@
+id: git-abort
+tool: git
+example: git merge --abort
+title:
+  en: Give up a merge or a rebase halfway
+  es: Abandonar un merge o un rebase a medias
+match:
+  - run: [git merge, git rebase, git cherry-pick, git revert, git am]
+    with: [--abort]
+verdict: "no"
+loses:
+  en: The conflicts that you had already resolved.
+  es: Los conflictos que ya habías resuelto.
+before:
+  note:
+    en: Copy the files that you resolved outside the repository.
+    es: Copia fuera del repositorio los archivos que resolviste.
+  run: [cp <file> <copy>]
+  back: [cp <copy> <file>]
+proof:
+  lab: git
+  cases:
+    - shows: before
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo feature > a.txt; git commit -qam feature
+        git switch -q main; echo main > a.txt; git commit -qam main
+        git merge feature >/dev/null || true
+        echo resolved > a.txt; git add a.txt
+      run: git merge --abort
+      check: test "$(cat a.txt)" = resolved
+      fill: { file: a.txt, copy: ../resolved.txt }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo feature > a.txt; git commit -qam feature
+        git switch -q main; echo main > a.txt; git commit -qam main
+        git merge feature >/dev/null || true
+        echo resolved > a.txt
+      run: git merge --abort
+      check: test "$(cat a.txt)" = resolved

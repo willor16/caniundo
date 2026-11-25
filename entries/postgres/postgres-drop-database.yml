@@ -1,0 +1,22 @@
+id: postgres-drop-database
+tool: postgres
+example: psql -c "DROP DATABASE shop"
+title:
+  en: Delete a database in PostgreSQL
+  es: Borrar una base de datos en PostgreSQL
+match:
+  - sql: DROP DATABASE
+    dialects: [postgres]
+  - run: dropdb
+verdict: "no"
+autocommit: true
+loses:
+  en: The whole database. It cannot run inside a transaction, so there is no ROLLBACK.
+  es: Toda la base. No puede ejecutarse dentro de una transacción, así que no hay ROLLBACK.
+before:
+  note:
+    en: "Make a copy with pg_dump, and check that it restores."
+    es: "Haz una copia con pg_dump y comprueba que se restaura."
+sources:
+  - https://www.postgresql.org/docs/current/sql-dropdatabase.html
+checked: 2026-11-25

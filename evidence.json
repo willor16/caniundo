@@ -1,0 +1,512 @@
+{
+  "clear-content": {
+    "digest": "9e0b050807ed6ff5",
+    "runs": [
+      {
+        "version": "PowerShell 5.1.26100.9818",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "cmd-delete": {
+    "digest": "28c557381a142cd8",
+    "runs": [
+      {
+        "version": "PowerShell 5.1.26100.9818",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "cp": {
+    "digest": "09869b4c95a9c8b6",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "dd": {
+    "digest": "86b8075654407d9e",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "find-delete": {
+    "digest": "20dd285818eaf209",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-abort": {
+    "digest": "0ecb3f5d9f471b3c",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-branch-delete": {
+    "digest": "de45388d82ea5a8c",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-branch-force": {
+    "digest": "7cc767e1bec91d15",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-checkout-files": {
+    "digest": "acd5f8f89106087a",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-checkout-force": {
+    "digest": "59a31d9560379a19",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-cherry-pick": {
+    "digest": "bc1884cff90dba15",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-clean": {
+    "digest": "e0c6199a094db747",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-commit": {
+    "digest": "d7303c09278b023f",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-commit-amend": {
+    "digest": "17fdc6054464b8de",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-filter-branch": {
+    "digest": "72d8cd8b3a3f9657",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-merge": {
+    "digest": "34d25454db97aad8",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-prune": {
+    "digest": "543d9cc5e74908f2",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-push-delete": {
+    "digest": "71179b95f2d0c82d",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-push-force": {
+    "digest": "82ebb6af353028a1",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-push-lease": {
+    "digest": "47e09eb4eca9c383",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-rebase": {
+    "digest": "a2ff28e040683645",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-reset-hard": {
+    "digest": "7ec3588d16f7e1dc",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-restore": {
+    "digest": "580cb96047f7cb51",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-rm": {
+    "digest": "f51571ec43c7a4a5",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-rm-force": {
+    "digest": "da3c8d0676b9bcde",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-stash-clear": {
+    "digest": "1723cdd137756510",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-stash-drop": {
+    "digest": "b3df883530e48f07",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-tag-delete": {
+    "digest": "57c05b0ee594dba4",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-unstage": {
+    "digest": "abc442351fe686cc",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "git-worktree-remove": {
+    "digest": "5a9aec13fee71403",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "mv": {
+    "digest": "2bd62771b56bc1b8",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-delete-all": {
+    "digest": "f00f5f2215aa7192",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-drop-column": {
+    "digest": "9bc7dcd31bfd50e8",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-drop-schema": {
+    "digest": "c3714a199869bafa",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-drop-table": {
+    "digest": "ba3adfac31a1379c",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-truncate": {
+    "digest": "9ff8a9e982b68a59",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "postgres-update-all": {
+    "digest": "2e1a316628e9767b",
+    "runs": [
+      {
+        "version": "PostgreSQL 17.5 (PGlite)",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "redirect": {
+    "digest": "520071f5ca996e2f",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "remove-item": {
+    "digest": "4b0d8661d8f80e9d",
+    "runs": [
+      {
+        "version": "PowerShell 5.1.26100.9818",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "rm": {
+    "digest": "30cbadbaf6b4a41a",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "rm-build-output": {
+    "digest": "a966f7a88b56ac14",
+    "runs": [
+      {
+        "version": "npm 11.6.2",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "rm-git": {
+    "digest": "88dfc27d8d82cf76",
+    "runs": [
+      {
+        "version": "git 2.45.2.windows.1",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "rm-node-modules": {
+    "digest": "57aa1e9bff76ca08",
+    "runs": [
+      {
+        "version": "npm 11.6.2",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "rm-temporary": {
+    "digest": "5ca0bf46c7405911",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "sed-in-place": {
+    "digest": "8e6fb95ab003908c",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "set-content": {
+    "digest": "9df66170f927ecbc",
+    "runs": [
+      {
+        "version": "PowerShell 5.1.26100.9818",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "shred": {
+    "digest": "51c92ab6677fad2d",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "sqlite-delete-all": {
+    "digest": "32764f2647d9b83d",
+    "runs": [
+      {
+        "version": "SQLite 3.50.4",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "sqlite-drop-table": {
+    "digest": "ef901caccc3508ff",
+    "runs": [
+      {
+        "version": "SQLite 3.50.4",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "sqlite-update-all": {
+    "digest": "06af3609eca7451a",
+    "runs": [
+      {
+        "version": "SQLite 3.50.4",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  },
+  "truncate": {
+    "digest": "309017a2caa230c3",
+    "runs": [
+      {
+        "version": "GNU coreutils 8.32",
+        "platform": "win32",
+        "date": "2026-11-25"
+      }
+    ]
+  }
+}

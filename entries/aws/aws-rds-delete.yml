@@ -1,0 +1,25 @@
+id: aws-rds-delete
+tool: aws
+example: aws rds delete-db-instance --db-instance-identifier shop --final-db-snapshot-identifier shop-last
+title:
+  en: Delete a database in RDS
+  es: Borrar una base de datos de RDS
+match:
+  - run: [aws rds delete-db-instance, aws rds delete-db-cluster]
+verdict: partly
+loses:
+  en: The server and its address. Automated backups too, unless you choose to keep them.
+  es: El servidor y su dirección. También las copias automáticas, salvo que elijas conservarlas.
+keeps:
+  en: The final snapshot and the manual ones.
+  es: La instantánea final y las manuales.
+recover:
+  - id: snapshot
+    gives:
+      en: A new database with the data of the snapshot.
+      es: Una base nueva con los datos de la instantánea.
+    run: [aws rds restore-db-instance-from-db-snapshot --db-instance-identifier <new-name> --db-snapshot-identifier <snapshot>]
+sources:
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+  - https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html
+checked: 2026-11-25

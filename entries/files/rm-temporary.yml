@@ -1,0 +1,24 @@
+id: rm-temporary
+tool: files
+example: rm -rf /tmp/build-1234
+title:
+  en: Delete temporary files
+  es: Borrar archivos temporales
+match:
+  - run: rm
+    operands:
+      every: ["/tmp/*", "/var/tmp/*", "*/AppData/Local/Temp/*"]
+      none: ["*..*"]
+overrides: [rm]
+verdict: "no"
+interrupt: false
+loses:
+  en: The temporary files.
+  es: Los archivos temporales.
+proof:
+  lab: files
+  cases:
+    - shows: lost
+      setup: mkdir -p /tmp/caniundo-proof; echo one > /tmp/caniundo-proof/a.txt
+      run: rm -rf /tmp/caniundo-proof
+      check: test -e /tmp/caniundo-proof/a.txt

@@ -1,0 +1,48 @@
+id: git-rm-force
+tool: git
+example: git rm -f old.txt
+title:
+  en: Delete a file even if it has changes
+  es: Borrar un archivo aunque tenga cambios
+match:
+  - run: git rm
+    with: [-f|--force]
+    without: [--cached, -n|--dry-run]
+verdict: partly
+loses:
+  en: The changes in the file that were not committed.
+  es: Los cambios del archivo que no se confirmaron.
+keeps:
+  en: The file as it was in the last commit.
+  es: El archivo como estaba en el último commit.
+instead:
+  note:
+    en: Without -f, git refuses when something would be lost.
+    es: Sin -f, git se niega cuando se perdería algo.
+recover:
+  - id: restore
+    gives:
+      en: The file, as in the last commit.
+      es: El archivo, como en el último commit.
+    run: [git restore --staged --worktree -- <file>]
+    risk:
+      en: Replaces a new file with the same name.
+      es: Reemplaza un archivo nuevo con el mismo nombre.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: restore
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+      run: git rm -qf a.txt
+      check: test "$(cat a.txt)" = one
+      fill: { file: a.txt }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git rm -qf a.txt; git restore --staged --worktree a.txt
+      check: test "$(cat a.txt)" = edited

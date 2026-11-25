@@ -1,0 +1,22 @@
+id: gcloud-sql-delete
+tool: gcloud
+example: gcloud sql instances delete shop
+title:
+  en: Delete a Cloud SQL server
+  es: Borrar un servidor de Cloud SQL
+match:
+  - run: gcloud sql instances delete
+verdict: "no"
+loses:
+  en: All the data and its backups, also the ones made on demand.
+  es: Todos los datos y sus copias, también las hechas a petición.
+keeps:
+  en: A final backup, only if you ask for one. Otherwise, Google may be able to help within 4 days.
+  es: Una copia final, solo si la pides. Si no, Google quizá pueda ayudar en los primeros 4 días.
+instead:
+  note:
+    en: Add --enable-final-backup, so that a last copy stays.
+    es: Agrega --enable-final-backup, para que quede una última copia.
+sources:
+  - https://docs.cloud.google.com/sql/docs/mysql/delete-instance
+checked: 2026-11-25

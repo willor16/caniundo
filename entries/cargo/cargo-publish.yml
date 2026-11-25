@@ -1,0 +1,20 @@
+id: cargo-publish
+tool: cargo
+example: cargo publish
+title:
+  en: Publish a crate
+  es: Publicar un crate
+match:
+  - run: cargo publish
+    without: [-n|--dry-run]
+verdict: "no"
+loses:
+  en: That version cannot be overwritten, and its code cannot be deleted.
+  es: Esa versión no se puede sobrescribir, y su código no se puede borrar.
+instead:
+  note:
+    en: "See what it would do: cargo publish --dry-run. To stop new uses of a version, cargo yank."
+    es: "Mira qué haría: cargo publish --dry-run. Para frenar nuevos usos de una versión, cargo yank."
+sources:
+  - https://doc.rust-lang.org/cargo/reference/publishing.html
+checked: 2026-11-25

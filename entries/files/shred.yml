@@ -1,0 +1,20 @@
+id: shred
+tool: files
+example: shred -u secret.txt
+title:
+  en: Destroy a file on purpose
+  es: Destruir un archivo a propósito
+match:
+  - run: [shred, gshred, srm]
+verdict: "no"
+loses:
+  en: The file. It is overwritten so that nobody can recover it.
+  es: El archivo. Se sobrescribe para que nadie lo recupere.
+proof:
+  lab: files
+  platforms: [linux, win32]
+  cases:
+    - shows: lost
+      setup: echo one > a.txt
+      run: shred a.txt
+      check: grep -q one a.txt

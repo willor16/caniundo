@@ -1,0 +1,30 @@
+id: crontab-remove
+tool: system
+example: crontab -r
+title:
+  en: Delete all your scheduled tasks
+  es: Borrar todas tus tareas programadas
+match:
+  - run: crontab
+    with: [-r]
+    without: [-i]
+verdict: partly
+loses:
+  en: All of them, with no question. Some systems keep no copy.
+  es: Todas, sin preguntar. Algunos sistemas no guardan copia.
+keeps:
+  en: With cronie, the last version is saved in ~/.cache/crontab/crontab.bak.
+  es: Con cronie, la última versión queda en ~/.cache/crontab/crontab.bak.
+before:
+  note:
+    en: Save the output of crontab -l.
+    es: Guarda la salida de crontab -l.
+recover:
+  - id: cronie
+    gives:
+      en: The tasks, on systems with cronie.
+      es: Las tareas, en sistemas con cronie.
+    run: [crontab <backup-file>]
+sources:
+  - https://man7.org/linux/man-pages/man1/crontab.1.html
+checked: 2026-11-25

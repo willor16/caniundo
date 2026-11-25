@@ -1,0 +1,28 @@
+id: fly-volume-destroy
+tool: fly
+example: fly volumes destroy vol_123
+title:
+  en: Delete a Fly.io volume
+  es: Borrar un volumen de Fly.io
+match:
+  - run: [fly volumes destroy, flyctl volumes destroy, fly volume destroy, fly vol destroy]
+verdict: partly
+loses:
+  en: The data since the last snapshot.
+  es: Los datos desde la última instantánea.
+recover:
+  - id: snapshot
+    gives:
+      en: A new volume with the last snapshot. It needs the ID of the deleted one, which can be listed for 24 hours.
+      es: Un volumen nuevo con la última instantánea. Necesita el ID del borrado, que se puede consultar durante 24 horas.
+    run:
+      - fly volumes list --all
+      - fly volumes snapshots list <volume>
+      - fly volumes create <name> --snapshot-id <snapshot> -s <size>
+    until:
+      en: 5 days by default.
+      es: 5 días por defecto.
+sources:
+  - https://docs.fly.io/volumes/snapshots
+  - https://docs.fly.io/flyctl/cmd/fly_volumes_destroy
+checked: 2026-11-25

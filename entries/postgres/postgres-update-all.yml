@@ -1,0 +1,32 @@
+id: postgres-update-all
+tool: postgres
+example: psql -c "UPDATE users SET active = false"
+title:
+  en: Change every row of a table in PostgreSQL
+  es: Cambiar todas las filas de una tabla en PostgreSQL
+match:
+  - sql: UPDATE ... SET
+    dialects: [postgres]
+    everyRow: true
+verdict: "no"
+loses:
+  en: The old values of those columns, in every row, because there is no WHERE.
+  es: Los valores anteriores de esas columnas, en todas las filas, porque no hay WHERE.
+instead:
+  note:
+    en: Try it in a transaction that ends in ROLLBACK. To keep a copy, use pg_dump --table first.
+    es: Pruébalo en una transacción que termine en ROLLBACK. Para guardar una copia, usa antes pg_dump --table.
+  run: ['psql -c "BEGIN; UPDATE <table> SET <column> = 0; ROLLBACK"']
+  back: []
+proof:
+  lab: postgres
+  cases:
+    - shows: instead
+      setup: psql -c "create table users(n int)" -c "insert into users values (1)"
+      run: psql -c "UPDATE users SET n = 0"
+      check: test "$(psql -At -c "select n from users")" = 1
+      fill: { table: users, column: n }
+    - shows: lost
+      setup: psql -c "create table users(n int)" -c "insert into users values (1)"
+      run: psql -c "UPDATE users SET n = 0"
+      check: test "$(psql -At -c "select n from users")" = 1

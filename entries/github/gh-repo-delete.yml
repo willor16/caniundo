@@ -1,0 +1,25 @@
+id: gh-repo-delete
+tool: github
+example: gh repo delete owner/repo
+title:
+  en: Delete a GitHub repository
+  es: Borrar un repositorio de GitHub
+match:
+  - run: gh repo delete
+verdict: partly
+loses:
+  en: Team permissions. If it has forks, maybe the whole repository.
+  es: Los permisos de los equipos. Si tiene forks, quizá todo el repositorio.
+recover:
+  - id: web
+    gives:
+      en: "The repository, on github.com: Settings, Repositories, Deleted repositories."
+      es: "El repositorio, en github.com: Settings, Repositories, Deleted repositories."
+    run: []
+    until:
+      en: 90 days. It can take an hour to appear.
+      es: 90 días. Puede tardar una hora en aparecer.
+sources:
+  - https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository
+  - https://cli.github.com/manual/gh_repo_delete
+checked: 2026-11-25

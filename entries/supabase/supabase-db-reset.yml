@@ -1,0 +1,19 @@
+id: supabase-db-reset
+tool: supabase
+example: supabase db reset
+title:
+  en: Create a Supabase database again
+  es: Volver a crear una base de datos de Supabase
+match:
+  - run: supabase db reset
+verdict: "no"
+loses:
+  en: All the data that is not in a migration or in the seed file. With --remote or --linked, in the real database.
+  es: Todos los datos que no estén en una migración o en el archivo de datos iniciales. Con --remote o --linked, en la base real.
+before:
+  note:
+    en: Make a copy with supabase db dump, and check which database it points to.
+    es: Haz una copia con supabase db dump y comprueba a qué base apunta.
+sources:
+  - https://supabase.com/docs/reference/cli/supabase-db-reset
+checked: 2026-11-25

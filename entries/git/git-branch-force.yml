@@ -1,0 +1,38 @@
+id: git-branch-force
+tool: git
+example: git branch -f feature main
+title:
+  en: Move a branch to another commit
+  es: Mover una rama a otro commit
+match:
+  - run: git branch
+    with: [-f|--force]
+    without: [-D|-d|--delete]
+verdict: "yes"
+loses:
+  en: The branch stops pointing to its commits. They stay.
+  es: La rama deja de apuntar a sus commits, que siguen ahí.
+recover:
+  - id: previous
+    gives:
+      en: The position the branch had.
+      es: La posición que tenía la rama.
+    run: ["git branch --force <name> <name>@{1}"]
+    until:
+      en: 30 days by default. The 1 means one move ago.
+      es: 30 días por defecto. El 1 significa un movimiento atrás.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo two > a.txt; git commit -qam two; git switch -q main
+      run: git branch -f feature main
+      check: test "$(git log -1 --format=%s feature)" = two
+      fill: { name: feature }

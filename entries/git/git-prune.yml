@@ -1,0 +1,49 @@
+id: git-prune
+tool: git
+example: git gc --prune=now
+title:
+  en: Clean up what git was keeping
+  es: Limpiar lo que git conservaba
+match:
+  - run: git gc
+    with: [--prune=now|--prune=all]
+  - run: git prune
+    without: [-n|--dry-run]
+  - run: git reflog expire
+    without: [-n|--dry-run]
+  - run: git reflog delete
+    without: [-n|--dry-run]
+verdict: "no"
+loses:
+  en: Deleted commits, branches and stashes. The recipes that bring them back stop working.
+  es: Commits, ramas y stash borrados. Las recetas para recuperarlos dejan de servir.
+instead:
+  note:
+    en: git gc on its own keeps the last 2 weeks.
+    es: git gc, sin más, conserva las últimas 2 semanas.
+  run: [git gc]
+  back: []
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo two > a.txt; git commit -qam two
+        git rev-parse HEAD > "$HOME/tip"; git switch -q main; git branch -qD feature
+        git reflog expire --expire=now --all
+      run: git gc -q --prune=now
+      check: git cat-file -e "$(cat "$HOME/tip")"
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo two > a.txt; git commit -qam two
+        git rev-parse HEAD > "$HOME/tip"; git switch -q main; git branch -qD feature
+        git reflog expire --expire=now --all
+      run: git gc -q --prune=now
+      check: git cat-file -e "$(cat "$HOME/tip")"

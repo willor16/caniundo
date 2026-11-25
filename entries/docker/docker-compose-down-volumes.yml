@@ -1,0 +1,58 @@
+id: docker-compose-down-volumes
+tool: docker
+example: docker compose down -v
+title:
+  en: Stop a project and delete its volumes
+  es: Detener un proyecto y borrar sus volúmenes
+match:
+  - run: [docker compose down, docker-compose down, podman compose down]
+    with: [-v|--volumes]
+overrides: [docker-compose-down]
+verdict: "no"
+loses:
+  en: The volumes of the project, which usually hold its database. Volumes marked as external are kept.
+  es: Los volúmenes del proyecto, donde suele estar su base de datos. Los marcados como externos se conservan.
+instead:
+  note:
+    en: Without -v, the volumes stay.
+    es: Sin -v, los volúmenes se quedan.
+  run: [docker compose down]
+  back: [docker compose up --detach]
+sources:
+  - https://docs.docker.com/reference/cli/docker/compose/down/
+checked: 2026-11-25
+proof:
+  lab: docker
+  cases:
+    - shows: instead
+      setup: |
+        cat > compose.yml <<'YML'
+        services:
+          db:
+            image: busybox:1.37
+            command: sleep 300
+            stop_grace_period: 0s
+            volumes: ["data:/data"]
+        volumes:
+          data:
+        YML
+        docker compose up --detach
+        docker compose exec -T db sh -c 'echo one > /data/a.txt'
+      run: docker compose down -v
+      check: docker compose up --detach && test "$(docker compose exec -T db cat /data/a.txt)" = one
+    - shows: lost
+      setup: |
+        cat > compose.yml <<'YML'
+        services:
+          db:
+            image: busybox:1.37
+            command: sleep 300
+            stop_grace_period: 0s
+            volumes: ["data:/data"]
+        volumes:
+          data:
+        YML
+        docker compose up --detach
+        docker compose exec -T db sh -c 'echo one > /data/a.txt'
+      run: docker compose down -v
+      check: docker compose up --detach && test "$(docker compose exec -T db cat /data/a.txt)" = one

@@ -1,0 +1,22 @@
+id: az-group-delete
+tool: azure
+example: az group delete --name shop
+title:
+  en: Delete a resource group in Azure
+  es: Borrar un grupo de recursos de Azure
+match:
+  - run: az group delete
+verdict: "no"
+loses:
+  en: The group and everything in it.
+  es: El grupo y todo lo que contiene.
+keeps:
+  en: Some resources with soft delete, such as key vaults or blobs, if it was set up before.
+  es: Algunos recursos con borrado suave, como almacenes de claves o blobs, si ya estaba configurado.
+instead:
+  note:
+    en: "See what it has: az resource list --resource-group <name>"
+    es: "Mira qué contiene: az resource list --resource-group <name>"
+sources:
+  - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group
+checked: 2026-11-25

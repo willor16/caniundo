@@ -1,0 +1,39 @@
+id: git-restore
+tool: git
+example: git restore src/app.js
+title:
+  en: Discard changes in files
+  es: Descartar cambios en archivos
+match:
+  - run: git restore
+    without: [-S|--staged]
+  - run: git restore
+    with: [-W|--worktree]
+verdict: "no"
+loses:
+  en: The changes in those files that were not staged or committed.
+  es: Los cambios de esos archivos que no se prepararon ni se confirmaron.
+instead:
+  note:
+    en: Put them away instead of discarding them.
+    es: Guárdalos en lugar de descartarlos.
+  run: [git stash push -- <file>]
+  back: [git stash pop]
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git restore a.txt
+      check: test "$(cat a.txt)" = edited
+      fill: { file: a.txt }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git restore a.txt
+      check: test "$(cat a.txt)" = edited

@@ -1,0 +1,80 @@
+id: git-reset-hard
+tool: git
+example: git reset --hard HEAD~1
+title:
+  en: Move a branch and discard changes
+  es: Mover una rama y descartar cambios
+match:
+  - run: git reset
+    with: [--hard]
+verdict: partly
+loses:
+  en: Changes that were never committed or staged, in every file git tracks.
+  es: Los cambios que nunca se confirmaron ni se prepararon, en todos los archivos que git sigue.
+keeps:
+  en: The commits. Git remembers where the branch was.
+  es: Los commits. Git recuerda dónde estaba la rama.
+before:
+  note:
+    en: Put the changes away first.
+    es: Guarda antes los cambios.
+  run: [git stash push --include-untracked]
+  back: [git stash pop]
+recover:
+  - id: commits
+    gives:
+      en: The commits that the branch lost.
+      es: Los commits que perdió la rama.
+    run: [git reset --keep ORIG_HEAD]
+    until:
+      en: Works until another reset, merge or rebase. After that, the commit is still in git reflog, for 30 days by default.
+      es: Sirve hasta otro reset, merge o rebase. Después, el commit sigue en git reflog, 30 días por defecto.
+  - id: staged
+    gives:
+      en: Files that were staged with git add. The first command leaves them in that folder with other names.
+      es: Archivos preparados con git add. El primer comando los deja en esa carpeta con otros nombres.
+    run:
+      - git fsck --lost-found
+      - cp .git/lost-found/other/<hash> <file>
+    until:
+      en: Until git cleans up, 2 weeks by default.
+      es: Hasta que git haga limpieza, 2 semanas por defecto.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: commits
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > a.txt; git commit -qam two
+      run: git reset --hard HEAD~1
+      check: test "$(git log -1 --format=%s)" = two && test "$(cat a.txt)" = two
+    - shows: restored
+      recipe: staged
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo staged > a.txt; git add a.txt
+      run: git reset --hard
+      check: test "$(cat a.txt)" = staged
+      fill:
+        hash: $(ls .git/lost-found/other | head -n 1)
+        file: a.txt
+    - shows: before
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt; echo new > b.txt
+      run: git reset --hard HEAD
+      check: test "$(cat a.txt)" = edited && test "$(cat b.txt)" = new
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo edited > a.txt
+      run: git reset --hard HEAD
+      check: test "$(cat a.txt)" = edited || git fsck --lost-found | grep -q blob

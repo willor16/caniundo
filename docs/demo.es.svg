@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="877" height="787" viewBox="0 0 877 787" role="img" aria-label="caniundo">
+<rect width="100%" height="100%" rx="10" fill="#0d1117"/>
+<g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#d6dde6">
+<text x="24" y="46" xml:space="preserve"><tspan fill="#8b949e">$</tspan> caniundo "sudo docker compose down -v &amp;&amp; git reset --hard HEAD~3"</text>
+<text x="24" y="67" xml:space="preserve"></text>
+<text x="24" y="88" xml:space="preserve"><tspan font-weight="700" fill="#ff7b72">✗ NO</tspan>  <tspan font-weight="700" fill="#f2f2f2">sudo docker compose down -v</tspan></text>
+<text x="24" y="109" xml:space="preserve">  Detener un proyecto y borrar sus volúmenes</text>
+<text x="24" y="130" xml:space="preserve"></text>
+<text x="24" y="151" xml:space="preserve">  Se pierde   Los volúmenes del proyecto, donde suele estar su base de datos. Los marcados como</text>
+<text x="24" y="172" xml:space="preserve">              externos se conservan.</text>
+<text x="24" y="193" xml:space="preserve">  Mejor       Sin -v, los volúmenes se quedan.</text>
+<text x="24" y="214" xml:space="preserve">              <tspan fill="#76e3ea">$ docker compose down</tspan></text>
+<text x="24" y="235" xml:space="preserve">              <tspan fill="#8b949e">y para volver</tspan></text>
+<text x="24" y="256" xml:space="preserve">              <tspan fill="#76e3ea">$ docker compose up --detach</tspan></text>
+<text x="24" y="277" xml:space="preserve"></text>
+<text x="24" y="298" xml:space="preserve">  <tspan fill="#8b949e">Documentado, no probado</tspan></text>
+<text x="24" y="319" xml:space="preserve"></text>
+<text x="24" y="340" xml:space="preserve"><tspan font-weight="700" fill="#e3b341">~ EN PARTE</tspan>  <tspan font-weight="700" fill="#f2f2f2">git reset --hard HEAD~3</tspan></text>
+<text x="24" y="361" xml:space="preserve">  Mover una rama y descartar cambios</text>
+<text x="24" y="382" xml:space="preserve"></text>
+<text x="24" y="403" xml:space="preserve">  Se pierde   Los cambios que nunca se confirmaron ni se prepararon, en todos los archivos que git</text>
+<text x="24" y="424" xml:space="preserve">              sigue.</text>
+<text x="24" y="445" xml:space="preserve">  Se conserva Los commits. Git recuerda dónde estaba la rama.</text>
+<text x="24" y="466" xml:space="preserve">  Antes       Guarda antes los cambios.</text>
+<text x="24" y="487" xml:space="preserve">              <tspan fill="#76e3ea">$ git stash push --include-untracked</tspan></text>
+<text x="24" y="508" xml:space="preserve">              <tspan fill="#8b949e">y para volver</tspan></text>
+<text x="24" y="529" xml:space="preserve">              <tspan fill="#76e3ea">$ git stash pop</tspan></text>
+<text x="24" y="550" xml:space="preserve">  Deshacer    Los commits que perdió la rama.</text>
+<text x="24" y="571" xml:space="preserve">              <tspan fill="#76e3ea">$ git reset --keep ORIG_HEAD</tspan></text>
+<text x="24" y="592" xml:space="preserve">              Sirve hasta otro reset, merge o rebase. Después, el commit sigue en git reflog, 30</text>
+<text x="24" y="613" xml:space="preserve">              días por defecto.</text>
+<text x="24" y="634" xml:space="preserve">  Deshacer    Archivos preparados con git add. El primer comando los deja en esa carpeta con otros</text>
+<text x="24" y="655" xml:space="preserve">              nombres.</text>
+<text x="24" y="676" xml:space="preserve">              <tspan fill="#76e3ea">$ git fsck --lost-found</tspan></text>
+<text x="24" y="697" xml:space="preserve">              <tspan fill="#76e3ea">$ cp .git/lost-found/other/&lt;hash&gt; &lt;file&gt;</tspan></text>
+<text x="24" y="718" xml:space="preserve">              Hasta que git haga limpieza, 2 semanas por defecto.</text>
+<text x="24" y="739" xml:space="preserve"></text>
+<text x="24" y="760" xml:space="preserve">  <tspan fill="#8b949e">Probado: git 2.45.2.windows.1, Windows, 2026-11-25</tspan></text>
+</g>
+</svg>

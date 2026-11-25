@@ -1,0 +1,22 @@
+id: mysql-drop
+tool: mysql
+example: mysql -e "DROP TABLE users" shop
+title:
+  en: Delete or empty a table in MySQL
+  es: Borrar o vaciar una tabla en MySQL
+match:
+  - sql: [DROP TABLE, TRUNCATE, DROP DATABASE, DROP SCHEMA, ALTER TABLE ... DROP]
+    dialects: [mysql]
+verdict: "no"
+autocommit: true
+loses:
+  en: The data. MySQL commits these statements on its own, so ROLLBACK does nothing, even inside a transaction.
+  es: Los datos. MySQL confirma estas sentencias por su cuenta, así que ROLLBACK no hace nada, ni dentro de una transacción.
+before:
+  note:
+    en: Rename the table instead of deleting it, or copy it with mysqldump.
+    es: Renombra la tabla en lugar de borrarla, o cópiala con mysqldump.
+sources:
+  - https://dev.mysql.com/doc/refman/8.4/en/implicit-commit.html
+  - https://dev.mysql.com/doc/refman/8.4/en/cannot-roll-back.html
+checked: 2026-11-25

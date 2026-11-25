@@ -1,0 +1,39 @@
+id: git-rebase
+tool: git
+example: git rebase main
+title:
+  en: Rewrite the commits of a branch
+  es: Reescribir los commits de una rama
+match:
+  - run: git rebase
+    without: [--abort, --continue, --skip, --quit, --edit-todo, --show-current-patch]
+verdict: "yes"
+loses:
+  en: Nothing. The old commits stay outside the branch.
+  es: Nada. Los commits viejos quedan fuera de la rama.
+recover:
+  - id: previous
+    gives:
+      en: The branch as it was before the rebase.
+      es: La rama como estaba antes del rebase.
+    run: ["git reset --keep <branch>@{1}"]
+    until:
+      en: 30 days by default. The 1 means one move ago.
+      es: 30 días por defecto. El 1 significa un movimiento atrás.
+sources:
+  - https://git-scm.com/docs/git-gc
+checked: 2026-11-25
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: previous
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git switch -qc feature; echo f > f.txt; git add f.txt; git commit -qm feature
+        git rev-parse HEAD > "$HOME/tip"
+        git switch -q main; echo two > a.txt; git commit -qam two; git switch -q feature
+      run: git rebase -q main
+      check: test "$(git rev-parse feature)" = "$(cat "$HOME/tip")"
+      fill: { branch: feature }

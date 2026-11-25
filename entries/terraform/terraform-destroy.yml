@@ -1,0 +1,30 @@
+id: terraform-destroy
+tool: terraform
+example: terraform destroy
+title:
+  en: Delete all the infrastructure
+  es: Borrar toda la infraestructura
+match:
+  - run: [terraform destroy, tofu destroy]
+  - run: [terraform apply, tofu apply]
+    with: [-destroy|--destroy]
+verdict: partly
+loses:
+  en: The data in it, such as databases, disks and buckets.
+  es: Los datos que contiene, como bases de datos, discos y buckets.
+keeps:
+  en: The configuration. It creates the same things again, but empty.
+  es: La configuración. Vuelve a crear lo mismo, pero vacío.
+instead:
+  note:
+    en: "See what it would delete: terraform plan -destroy"
+    es: "Mira qué borraría: terraform plan -destroy"
+recover:
+  - id: apply
+    gives:
+      en: The same infrastructure, new and empty.
+      es: La misma infraestructura, nueva y vacía.
+    run: [terraform apply]
+sources:
+  - https://developer.hashicorp.com/terraform/cli/commands/destroy
+checked: 2026-11-25

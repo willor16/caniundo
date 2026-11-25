@@ -1,0 +1,34 @@
+id: set-content
+tool: windows
+example: Set-Content notes.txt hello
+title:
+  en: Write over a file in PowerShell
+  es: Escribir encima de un archivo en PowerShell
+match:
+  - run: set-content
+    without: [-WhatIf]
+  - run: out-file
+    without: [-WhatIf, -Append, -NoClobber]
+verdict: "no"
+interrupt: false
+loses:
+  en: What the file had, if it already existed.
+  es: Lo que tenía el archivo, si ya existía.
+before:
+  note:
+    en: Keep a copy. Add-Content adds to the end and deletes nothing.
+    es: Guarda una copia. Add-Content agrega al final y no borra nada.
+  run: [Copy-Item <file> <copy>]
+  back: [Copy-Item <copy> <file>]
+proof:
+  lab: powershell
+  cases:
+    - shows: before
+      setup: Set-Content a.txt one
+      run: Set-Content a.txt two
+      check: if ((Get-Content a.txt) -ne 'one') { exit 1 }
+      fill: { file: a.txt, copy: a.bak }
+    - shows: lost
+      setup: Set-Content a.txt one
+      run: Set-Content a.txt two
+      check: if ((Get-Content a.txt) -ne 'one') { exit 1 }

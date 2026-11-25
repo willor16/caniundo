@@ -1,0 +1,12 @@
+{
+  "name": "caniundo",
+  "description": "Can I undo this?",
+  "owner": { "name": "willor16" },
+  "plugins": [
+    {
+      "name": "caniundo",
+      "source": "./",
+      "description": "Tells you what a command would destroy before Claude runs it, and how to get it back after."
+    }
+  ]
+}

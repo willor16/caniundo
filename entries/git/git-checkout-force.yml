@@ -1,0 +1,46 @@
+id: git-checkout-force
+tool: git
+example: git checkout -f main
+title:
+  en: Change branch and discard changes
+  es: Cambiar de rama y descartar cambios
+match:
+  - run: git checkout
+    with: [-f|--force]
+  - run: git switch
+    with: [-f|--force|--discard-changes]
+overrides: [git-checkout-files]
+verdict: "no"
+loses:
+  en: Every change that was not committed.
+  es: Todos los cambios sin confirmar.
+instead:
+  note:
+    en: Put the changes away, then change branch. The way back needs both steps.
+    es: Guarda los cambios y después cambia de rama. Para volver hacen falta los dos pasos.
+  run:
+    - git stash push --include-untracked
+    - git switch <branch>
+  back:
+    - git switch -
+    - git stash pop
+proof:
+  lab: git
+  cases:
+    - shows: instead
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git branch other
+        echo edited > a.txt
+      run: git checkout -f other
+      check: test "$(cat a.txt)" = edited
+      fill: { branch: other }
+    - shows: lost
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        git branch other
+        echo edited > a.txt
+      run: git checkout -f other
+      check: test "$(cat a.txt)" = edited

@@ -1,0 +1,27 @@
+id: helm-uninstall
+tool: kubernetes
+example: helm uninstall shop
+title:
+  en: Uninstall a Helm release
+  es: Desinstalar una versión de Helm
+match:
+  - run: [helm uninstall, helm delete, helm un, helm del]
+    without: [--dry-run]
+verdict: partly
+loses:
+  en: The history of the release and the values that you did not keep in a file.
+  es: El historial y los valores que no guardaste en un archivo.
+instead:
+  note:
+    en: --keep-history keeps the history. helm get values shows the values.
+    es: --keep-history conserva el historial. helm get values muestra los valores.
+recover:
+  - id: install
+    gives:
+      en: The release again, with the values you have.
+      es: La instalación otra vez, con los valores que tengas.
+    run: [helm install <release> <chart> --values <file>]
+sources:
+  - https://helm.sh/docs/helm/helm_uninstall/
+  - https://helm.sh/docs/helm/helm_install/
+checked: 2026-11-25

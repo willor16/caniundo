@@ -1,0 +1,24 @@
+id: aws-ec2-terminate
+tool: aws
+example: aws ec2 terminate-instances --instance-ids i-0abc
+title:
+  en: Delete an EC2 server
+  es: Borrar un servidor de EC2
+match:
+  - run: aws ec2 terminate-instances
+    without: [--dry-run]
+verdict: "no"
+loses:
+  en: The server and its main disk. Other disks created with it from the command line too, unless DeleteOnTermination is off.
+  es: El servidor y su disco principal. También otros discos creados con él desde la línea de comandos, salvo que DeleteOnTermination esté desactivado.
+instead:
+  note:
+    en: Stop it. That still erases instance store disks.
+    es: Detenlo. Eso sí borra los discos de tipo instance store.
+  run: [aws ec2 stop-instances --instance-ids <instance>]
+  back: [aws ec2 start-instances --instance-ids <instance>]
+sources:
+  - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html
+  - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/preserving-volumes-on-termination.html
+  - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
+checked: 2026-11-25

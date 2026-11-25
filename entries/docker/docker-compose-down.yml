@@ -1,0 +1,25 @@
+id: docker-compose-down
+tool: docker
+example: docker compose down
+title:
+  en: Stop a project and delete its containers
+  es: Detener un proyecto y borrar sus contenedores
+match:
+  - run: [docker compose down, docker-compose down, podman compose down]
+verdict: partly
+interrupt: false
+loses:
+  en: What the containers wrote outside their volumes.
+  es: Lo que los contenedores escribieron fuera de sus volúmenes.
+keeps:
+  en: The volumes and the images.
+  es: Los volúmenes y las imágenes.
+recover:
+  - id: up
+    gives:
+      en: The project, with the data of its volumes.
+      es: El proyecto, con los datos de sus volúmenes.
+    run: [docker compose up --detach]
+sources:
+  - https://docs.docker.com/reference/cli/docker/compose/down/
+checked: 2026-11-25

@@ -1,0 +1,35 @@
+id: redirect
+tool: files
+example: echo hello > notes.txt
+title:
+  en: Write over a file with >
+  es: Escribir encima de un archivo con >
+match:
+  - redirect: overwrite
+verdict: "no"
+interrupt: false
+loses:
+  en: What the file had, if it already existed, even when the command fails.
+  es: Lo que tenía el archivo, si ya existía, incluso si el comando falla.
+instead:
+  note:
+    en: ">> adds to the end and deletes nothing."
+    es: ">> agrega al final y no borra nada."
+before:
+  note:
+    en: Keep a copy.
+    es: Guarda una copia.
+  run: [cp <file> <copy>]
+  back: [cp <copy> <file>]
+proof:
+  lab: files
+  cases:
+    - shows: before
+      setup: echo one > a.txt
+      run: echo two > a.txt
+      check: test "$(cat a.txt)" = one
+      fill: { file: a.txt, copy: a.bak }
+    - shows: lost
+      setup: echo one > a.txt
+      run: "false > a.txt || true"
+      check: test "$(cat a.txt)" = one

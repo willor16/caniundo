@@ -1,0 +1,25 @@
+id: railway-volume-delete
+tool: railway
+example: railway volume delete
+title:
+  en: Delete a Railway volume
+  es: Borrar un volumen de Railway
+match:
+  - run: [railway volume delete, railway volume remove, railway volume rm]
+verdict: partly
+loses:
+  en: Everything in the volume, when the time is up.
+  es: Todo lo que hay en el volumen, cuando se acaba el plazo.
+recover:
+  - id: email
+    gives:
+      en: The volume, with the link in the email that Railway sends.
+      es: El volumen, con el enlace del correo que envía Railway.
+    run: []
+    until:
+      en: 48 hours.
+      es: 48 horas.
+sources:
+  - https://docs.railway.com/volumes/reference
+  - https://docs.railway.com/volumes/backups
+checked: 2026-11-25

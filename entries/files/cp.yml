@@ -1,0 +1,36 @@
+id: cp
+tool: files
+example: cp new.txt old.txt
+title:
+  en: Copy over a file
+  es: Copiar encima de un archivo
+match:
+  - run: cp
+    without: [-n|--no-clobber, -i|--interactive, -b|--backup]
+verdict: "no"
+interrupt: false
+loses:
+  en: What the destination had, if it already existed.
+  es: Lo que tenía el destino, si ya existía.
+instead:
+  note:
+    en: cp -n never replaces a file.
+    es: cp -n nunca reemplaza un archivo.
+before:
+  note:
+    en: Keep a copy of the destination.
+    es: Guarda una copia del destino.
+  run: [cp <file> <copy>]
+  back: [cp <copy> <file>]
+proof:
+  lab: files
+  cases:
+    - shows: before
+      setup: echo one > a.txt; echo two > b.txt
+      run: cp a.txt b.txt
+      check: test "$(cat b.txt)" = two
+      fill: { file: b.txt, copy: b.bak }
+    - shows: lost
+      setup: echo one > a.txt; echo two > b.txt
+      run: cp a.txt b.txt
+      check: test "$(cat b.txt)" = two

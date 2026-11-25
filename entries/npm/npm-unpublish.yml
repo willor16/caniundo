@@ -1,0 +1,20 @@
+id: npm-unpublish
+tool: npm
+example: npm unpublish my-package@1.0.0
+title:
+  en: Remove a package from npm
+  es: Quitar un paquete de npm
+match:
+  - run: [npm unpublish, pnpm unpublish]
+    without: [--dry-run]
+verdict: "no"
+loses:
+  en: That version, and its number can never be used again. If it was the last one, nothing can be published under that name for 24 hours.
+  es: Esa versión, y su número no se puede volver a usar. Si era la última, no se puede publicar con ese nombre durante 24 horas.
+instead:
+  note:
+    en: npm deprecate warns whoever installs it, and breaks nobody.
+    es: npm deprecate avisa a quien lo instala y no rompe a nadie.
+sources:
+  - https://docs.npmjs.com/policies/unpublish/
+checked: 2026-11-25

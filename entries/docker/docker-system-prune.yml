@@ -1,0 +1,24 @@
+id: docker-system-prune
+tool: docker
+example: docker system prune
+title:
+  en: Delete what Docker is not using
+  es: Borrar lo que Docker no está usando
+match:
+  - run: [docker system prune, podman system prune]
+verdict: partly
+loses:
+  en: Stopped containers, with what they wrote. With --volumes, also unused anonymous volumes.
+  es: Los contenedores detenidos, con lo que escribieron. Con --volumes, también los volúmenes anónimos sin usar.
+keeps:
+  en: Volumes with a name.
+  es: Los volúmenes con nombre.
+recover:
+  - id: pull
+    gives:
+      en: Images that exist in a registry. The ones built here have to be built again.
+      es: Las imágenes que existen en un registro. Las creadas aquí hay que volver a crearlas.
+    run: [docker pull <image>]
+sources:
+  - https://docs.docker.com/reference/cli/docker/system/prune/
+checked: 2026-11-25

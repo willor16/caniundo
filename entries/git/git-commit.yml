@@ -1,0 +1,33 @@
+id: git-commit
+tool: git
+example: git commit -m "message"
+title:
+  en: Save a commit
+  es: Guardar un commit
+match:
+  - run: git commit
+    without: [--amend, --dry-run]
+verdict: "yes"
+loses:
+  en: Nothing.
+  es: Nada.
+recover:
+  - id: undo
+    gives:
+      en: The changes, staged as they were before the commit.
+      es: Los cambios, preparados como estaban antes del commit.
+    run: [git reset --soft HEAD~1]
+    until:
+      en: Before you push it. After that, use git revert.
+      es: Antes de subirlo. Después, usa git revert.
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: undo
+      setup: |
+        git init -q
+        echo one > a.txt; git add a.txt; git commit -qm one
+        echo two > b.txt; git add b.txt
+      run: git commit -qm "two"
+      check: test "$(git diff --cached --name-only)" = b.txt && test "$(git log -1 --format=%s)" = one

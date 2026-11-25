@@ -1,0 +1,19 @@
+id: docker-volume-rm
+tool: docker
+example: docker volume rm shop_data
+title:
+  en: Delete a volume
+  es: Borrar un volumen
+match:
+  - run: [docker volume rm, docker volume remove, podman volume rm]
+verdict: "no"
+loses:
+  en: Everything in the volume.
+  es: Todo lo que hay en el volumen.
+before:
+  note:
+    en: Copy what is inside, for example with docker cp from a container that uses it.
+    es: Copia lo que contiene, por ejemplo con docker cp desde un contenedor que lo use.
+sources:
+  - https://docs.docker.com/reference/cli/docker/volume/rm/
+checked: 2026-11-25

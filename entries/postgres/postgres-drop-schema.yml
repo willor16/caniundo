@@ -1,0 +1,31 @@
+id: postgres-drop-schema
+tool: postgres
+example: psql -c "DROP SCHEMA public CASCADE"
+title:
+  en: Delete a schema in PostgreSQL
+  es: Borrar un esquema en PostgreSQL
+match:
+  - sql: DROP SCHEMA
+    dialects: [postgres]
+verdict: "no"
+loses:
+  en: With CASCADE, all the tables, views and functions in it.
+  es: Con CASCADE, todas sus tablas, vistas y funciones.
+instead:
+  note:
+    en: Rename it first, and delete it when nothing needs it.
+    es: Renómbralo primero y bórralo cuando nada lo necesite.
+  run: ['psql -c "ALTER SCHEMA <schema> RENAME TO <old-schema>"']
+  back: ['psql -c "ALTER SCHEMA <old-schema> RENAME TO <schema>"']
+proof:
+  lab: postgres
+  cases:
+    - shows: instead
+      setup: psql -c "create schema shop" -c "create table shop.users(n int)" -c "insert into shop.users values (1)"
+      run: psql -c "DROP SCHEMA shop CASCADE"
+      check: test "$(psql -At -c "select n from shop.users")" = 1
+      fill: { schema: shop, old-schema: shop_old }
+    - shows: lost
+      setup: psql -c "create schema shop" -c "create table shop.users(n int)" -c "insert into shop.users values (1)"
+      run: psql -c "DROP SCHEMA shop CASCADE"
+      check: test "$(psql -At -c "select n from shop.users")" = 1

@@ -1,0 +1,31 @@
+id: dd
+tool: files
+example: dd if=image.iso of=/dev/sdb
+title:
+  en: Write over a file or a disk
+  es: Escribir encima de un archivo o un disco
+match:
+  - run: dd
+    operands: { any: ["of=*"], none: ["of=/dev/null", "of=/dev/stdout"] }
+verdict: "no"
+loses:
+  en: What was there. With a disk, every partition on it.
+  es: Lo que había ahí. En un disco, todas sus particiones.
+before:
+  note:
+    en: Check the name of the destination twice, and keep a copy of a file.
+    es: Revisa dos veces el nombre del destino y guarda una copia si es un archivo.
+  run: [cp <file> <copy>]
+  back: [cp <copy> <file>]
+proof:
+  lab: files
+  cases:
+    - shows: before
+      setup: echo one > a.txt; echo two > b.txt
+      run: dd if=b.txt of=a.txt 2>/dev/null
+      check: test "$(cat a.txt)" = one
+      fill: { file: a.txt, copy: a.bak }
+    - shows: lost
+      setup: echo one > a.txt; echo two > b.txt
+      run: dd if=b.txt of=a.txt 2>/dev/null
+      check: test "$(cat a.txt)" = one

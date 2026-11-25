@@ -1,0 +1,48 @@
+id: git-push-delete
+tool: git
+example: git push origin --delete feature
+title:
+  en: Delete a branch on the server
+  es: Borrar una rama en el servidor
+match:
+  - run: git push
+    with: [-d|--delete]
+  - run: git push
+    operands: { any: [":*"] }
+  - run: git push
+    with: [--prune]
+verdict: partly
+loses:
+  en: The commits on that branch that you never downloaded.
+  es: Los commits de esa rama que nunca descargaste.
+keeps:
+  en: The commits that you have in this copy.
+  es: Los commits que tienes en esta copia.
+recover:
+  - id: push
+    gives:
+      en: The branch, from the last commit of it that you have. Look for it in git reflog or in your local branch.
+      es: La rama, desde el último commit que tengas de ella. Búscalo en git reflog o en tu rama local.
+    run: ["git push origin <commit>:refs/heads/<branch>"]
+proof:
+  lab: git
+  cases:
+    - shows: restored
+      recipe: push
+      setup: |
+        git init -q --bare ../server.git
+        git clone -q ../server.git . 2>/dev/null
+        echo one > a.txt; git add a.txt; git commit -qm one; git push -q origin main
+        git switch -qc feature; echo two > a.txt; git commit -qam two; git push -q origin feature
+      run: git push origin --delete feature
+      check: git -C ../server.git log --format=%s feature 2>/dev/null | grep -qx two
+      fill: { commit: feature, branch: feature }
+    - shows: lost
+      setup: |
+        git init -q --bare ../server.git
+        git clone -q ../server.git ../theirs 2>/dev/null; cd ../theirs
+        echo one > a.txt; git add a.txt; git commit -qm one; git push -q origin main
+        cd ../work; git clone -q ../server.git .; cd ../theirs
+        git switch -qc feature; echo two > a.txt; git commit -qam theirs; git push -q origin feature
+      run: git push origin :feature
+      check: git -C ../server.git log --format=%s feature 2>/dev/null | grep -qx theirs || git log --all --reflog --format=%s | grep -qx theirs

@@ -1,0 +1,19 @@
+id: docker-volume-prune
+tool: docker
+example: docker volume prune
+title:
+  en: Delete the volumes that no container uses
+  es: Borrar los volúmenes que ningún contenedor usa
+match:
+  - run: [docker volume prune, podman volume prune]
+verdict: "no"
+loses:
+  en: Unused anonymous volumes. With --all, also the ones with a name, such as the database of a project that is stopped.
+  es: Los volúmenes anónimos sin usar. Con --all, también los que tienen nombre, como la base de datos de un proyecto detenido.
+instead:
+  note:
+    en: "See the list first: docker volume ls --filter dangling=true"
+    es: "Mira antes la lista: docker volume ls --filter dangling=true"
+sources:
+  - https://docs.docker.com/reference/cli/docker/volume/prune/
+checked: 2026-11-25

@@ -1,0 +1,15 @@
+id: heroku-apps-destroy
+tool: heroku
+example: heroku apps:destroy --app shop
+title:
+  en: Delete a Heroku app
+  es: Borrar una app de Heroku
+match:
+  - run: [heroku apps:destroy, heroku apps:delete, heroku addons:destroy]
+verdict: "no"
+loses:
+  en: The app or the add-on. Heroku describes it as permanent.
+  es: La app o el complemento. Heroku lo describe como permanente.
+sources:
+  - https://devcenter.heroku.com/articles/heroku-cli-commands
+checked: 2026-11-25

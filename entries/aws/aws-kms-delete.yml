@@ -1,0 +1,28 @@
+id: aws-kms-delete
+tool: aws
+example: aws kms schedule-key-deletion --key-id 1234
+title:
+  en: Schedule the deletion of an encryption key
+  es: Programar el borrado de una clave de cifrado
+match:
+  - run: aws kms schedule-key-deletion
+verdict: "yes"
+interrupt: true
+loses:
+  en: Nothing until the date. After that, what was encrypted with the key cannot be read.
+  es: Nada hasta la fecha. Después, lo cifrado con esa clave no se puede leer.
+recover:
+  - id: cancel
+    gives:
+      en: The key. It stays disabled until the second command.
+      es: La clave. Queda desactivada hasta el segundo comando.
+    run:
+      - aws kms cancel-key-deletion --key-id <key>
+      - aws kms enable-key --key-id <key>
+    until:
+      en: Until the waiting period ends, from 7 to 30 days.
+      es: Hasta que termine el plazo, de 7 a 30 días.
+sources:
+  - https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
+  - https://docs.aws.amazon.com/cli/latest/reference/kms/cancel-key-deletion.html
+checked: 2026-11-25

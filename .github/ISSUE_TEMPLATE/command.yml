@@ -1,0 +1,20 @@
+name: A command is missing or wrong
+description: Falta un comando o hay algo equivocado
+body:
+  - type: input
+    id: command
+    attributes:
+      label: Command / Comando
+      placeholder: git reset --hard
+    validations:
+      required: true
+  - type: textarea
+    id: lost
+    attributes:
+      label: What is lost, and how it comes back / Qué se pierde y cómo vuelve
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source or version / Fuente o versión

@@ -1,0 +1,24 @@
+id: kubectl-delete-namespace
+tool: kubernetes
+example: kubectl delete namespace shop
+title:
+  en: Delete a namespace
+  es: Borrar un namespace
+match:
+  - run: [kubectl delete namespace, kubectl delete namespaces, kubectl delete ns, oc delete project]
+    without: [--dry-run]
+  - run: kubectl delete
+    without: [--dry-run]
+    operands: { any: ["ns/*", "namespace/*", "namespaces/*"] }
+overrides: [kubectl-delete]
+verdict: "no"
+loses:
+  en: Everything in it, including secrets and the requests for volumes.
+  es: Todo lo que contiene, incluidos los secretos y las solicitudes de volúmenes.
+before:
+  note:
+    en: "See what it has: kubectl get all --namespace <name>. That list leaves out secrets and volumes."
+    es: "Mira qué tiene: kubectl get all --namespace <name>. Esa lista no incluye secretos ni volúmenes."
+sources:
+  - https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+checked: 2026-11-25

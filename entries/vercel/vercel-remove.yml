@@ -1,0 +1,29 @@
+id: vercel-remove
+tool: vercel
+example: vercel remove my-shop
+title:
+  en: Delete a Vercel deployment or project
+  es: Borrar un despliegue o proyecto de Vercel
+match:
+  - run: [vercel remove, vercel rm]
+verdict: partly
+loses:
+  en: The deployment. With the name of a project, the project and all of them.
+  es: El despliegue. Con el nombre de un proyecto, el proyecto y todos ellos.
+instead:
+  note:
+    en: --safe leaves alone the ones that are in use.
+    es: --safe no toca los que están en uso.
+recover:
+  - id: web
+    gives:
+      en: "A deployment, on vercel.com: project Settings, Security, Recently Deleted. Vercel does not say the same of a whole project."
+      es: "Un despliegue, en vercel.com: Settings del proyecto, Security, Recently Deleted. Vercel no dice lo mismo de un proyecto entero."
+    run: []
+    until:
+      en: From 1 to 30 days, depending on its age.
+      es: De 1 a 30 días, según su antigüedad.
+sources:
+  - https://vercel.com/docs/cli/remove
+  - https://vercel.com/docs/deployment-retention
+checked: 2026-11-25

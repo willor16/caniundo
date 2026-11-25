@@ -1,0 +1,31 @@
+id: clear-content
+tool: windows
+example: Clear-Content app.log
+title:
+  en: Empty a file in PowerShell
+  es: Vaciar un archivo en PowerShell
+match:
+  - run: clear-content
+    without: [-WhatIf]
+verdict: "no"
+loses:
+  en: What the file had.
+  es: Lo que tenía el archivo.
+before:
+  note:
+    en: Keep a copy.
+    es: Guarda una copia.
+  run: [Copy-Item <file> <copy>]
+  back: [Copy-Item <copy> <file>]
+proof:
+  lab: powershell
+  cases:
+    - shows: before
+      setup: Set-Content a.txt one
+      run: Clear-Content a.txt
+      check: if ((Get-Content a.txt) -ne 'one') { exit 1 }
+      fill: { file: a.txt, copy: a.bak }
+    - shows: lost
+      setup: Set-Content a.txt one
+      run: Clear-Content a.txt
+      check: if ((Get-Content a.txt) -ne 'one') { exit 1 }

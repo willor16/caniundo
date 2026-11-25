@@ -1,0 +1,21 @@
+id: pypi-upload
+tool: python
+example: twine upload dist/*
+title:
+  en: Publish a package on PyPI
+  es: Publicar un paquete en PyPI
+match:
+  - run: [twine upload, uv publish, poetry publish, flit publish, hatch publish]
+    without: [--dry-run]
+verdict: "no"
+loses:
+  en: That file name, forever. It can be deleted, but not uploaded again.
+  es: Ese nombre de archivo, para siempre. Se puede borrar, pero no volver a subir.
+instead:
+  note:
+    en: Try it on TestPyPI first. To stop new installs of a version, yank it on the PyPI website.
+    es: Pruébalo antes en TestPyPI. Para frenar nuevas instalaciones, márcala como «yank» en la web de PyPI.
+sources:
+  - https://docs.pypi.org/project-management/troubleshooting/
+  - https://docs.pypi.org/publishing/troubleshooting/
+checked: 2026-11-25

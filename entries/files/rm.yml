@@ -1,0 +1,30 @@
+id: rm
+tool: files
+example: rm -rf folder
+title:
+  en: Delete files
+  es: Borrar archivos
+match:
+  - run: [rm, unlink]
+verdict: "no"
+loses:
+  en: The files. They do not go to the trash.
+  es: Los archivos. No van a la papelera.
+instead:
+  note:
+    en: Move it somewhere else, and delete it when you are sure. In a git repository, what was committed comes back with git restore.
+    es: Muévelo a otro lugar y bórralo cuando estés seguro. En un repositorio de git, lo confirmado vuelve con git restore.
+  run: [mv <path> <elsewhere>]
+  back: [mv <elsewhere> <path>]
+proof:
+  lab: files
+  cases:
+    - shows: instead
+      setup: mkdir folder; echo one > folder/a.txt
+      run: rm -rf folder
+      check: test "$(cat folder/a.txt)" = one
+      fill: { path: folder, elsewhere: ../kept }
+    - shows: lost
+      setup: mkdir folder; echo one > folder/a.txt
+      run: rm -rf folder
+      check: test -e folder/a.txt

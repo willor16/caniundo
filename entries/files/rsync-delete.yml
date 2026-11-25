@@ -1,0 +1,21 @@
+id: rsync-delete
+tool: files
+example: rsync -a --delete source/ backup/
+title:
+  en: Copy a folder and delete what is extra
+  es: Copiar una carpeta y borrar lo que sobra
+match:
+  - run: rsync
+    with: [--delete|--del|--delete-before|--delete-during|--delete-delay|--delete-after|--delete-excluded]
+    without: [-n|--dry-run, --backup-dir]
+verdict: "no"
+loses:
+  en: The files in the destination that are not in the source, and the old version of the ones that changed.
+  es: Los archivos del destino que no están en el origen, y la versión vieja de los que cambiaron.
+before:
+  note:
+    en: Add --dry-run to see the list, or --backup --backup-dir to keep what it would delete.
+    es: Agrega --dry-run para ver la lista, o --backup --backup-dir para conservar lo que borraría.
+sources:
+  - https://download.samba.org/pub/rsync/rsync.1
+checked: 2026-11-25

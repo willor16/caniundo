@@ -1,0 +1,29 @@
+id: redis-flush
+tool: redis
+example: redis-cli FLUSHALL
+title:
+  en: Delete everything in Redis
+  es: Borrar todo en Redis
+match:
+  - run: [redis-cli, valkey-cli]
+    operands: { any: [flushall, flushdb] }
+verdict: partly
+loses:
+  en: Every key. It also empties the snapshot on disk (RDB).
+  es: Todas las claves. También vacía la copia en disco (RDB).
+keeps:
+  en: The append-only file, if it was on and has not been rewritten since.
+  es: El archivo AOF, si estaba activo y no se ha reescrito desde entonces.
+recover:
+  - id: aof
+    gives:
+      en: "With the append-only file on: stop the server, delete the FLUSHALL at the end of the file, and start it again."
+      es: "Con el archivo AOF activo: detén el servidor, borra el FLUSHALL del final del archivo y vuelve a iniciarlo."
+    run: []
+    until:
+      en: Until Redis rewrites the file, so stop the server right away.
+      es: Hasta que Redis reescriba el archivo, así que detén el servidor de inmediato.
+sources:
+  - https://redis.io/docs/latest/commands/flushall/
+  - https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/
+checked: 2026-11-25
