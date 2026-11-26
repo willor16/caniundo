@@ -9,6 +9,7 @@ import { skillZip } from './skill.ts';
 
 const OUT = join(ROOT, 'site');
 const REPO = 'https://github.com/willor16/caniundo';
+const SITE = 'https://willor16.github.io/caniundo';
 const LANGS: Lang[] = ['en', 'es'];
 
 const WORDS = {
@@ -65,6 +66,11 @@ function page(lang: Lang, depth: number, title: string, description: string, oth
 <meta name="description" content="${esc(description)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="${SITE}/${lang === 'en' ? 'og.png' : 'og.es.png'}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${up}icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${up}site.css">
 </head>
@@ -142,8 +148,6 @@ function testCase(e: Entry, c: ProofCase, lang: Lang): string {
   return `<p class="small">${w.cases[c.shows]}</p><pre><code>${esc(text)}</code></pre>`;
 }
 
-const ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#1d1f1b"/><path d="M22 14 10 26l12 12M11 26h26a13 13 0 0 1 0 26H20" fill="none" stroke="#f3f1ea" stroke-width="6"/></svg>\n`;
-
 function write(path: string, content: string): void {
   const file = join(OUT, path);
   mkdirSync(dirname(file), { recursive: true });
@@ -157,7 +161,7 @@ for (const lang of LANGS) {
   write(`${base}index.html`, home(lang, entries));
   for (const e of entries) write(`${base}c/${e.id}/index.html`, entryPage(lang, e));
 }
-write('icon.svg', ICON);
+for (const file of ['icon.svg', 'og.png', 'og.es.png']) copyFileSync(join(ROOT, 'docs', file), join(OUT, file));
 writeFileSync(join(OUT, 'caniundo-skill.zip'), skillZip());
 write('.nojekyll', '');
 copyFileSync(join(ROOT, 'scripts/site.css'), join(OUT, 'site.css'));

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3f1ea"/>
+  <g transform="translate(80 64) scale(1.25)">
+    <rect width="64" height="64" rx="10" fill="#1d1f1b"/>
+    <g fill="none" stroke="#f3f1ea" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 25 A11.5 11.5 0 1 1 38.4 34.6 C35 36.6 32.5 38.4 32.5 42.5 V44"/>
+      <path d="M14.5 19.5 L21 26.5 L27.5 19.5"/>
+    </g>
+    <circle cx="32.5" cy="52" r="3.6" fill="#ff6b5b"/>
+  </g>
+  <text x="182" y="117" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#1d1f1b">caniundo</text>
+  <text x="76" y="258" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="104" font-weight="700" letter-spacing="-3" fill="#1d1f1b">Can I undo this?</text>
+  <rect x="80" y="318" width="1040" height="96" fill="#fbfaf6" stroke="#1d1f1b" stroke-width="4"/>
+  <text x="112" y="380" font-family="Consolas, monospace" font-size="40" fill="#5d6058">$</text>
+  <text x="150" y="380" font-family="Consolas, monospace" font-size="40" fill="#1d1f1b">docker compose down -v</text>
+  <text x="1088" y="384" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="54" font-weight="700" fill="#b3261e">No.</text>
+  <text x="80" y="492" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" fill="#1d1f1b">What a command destroys, a safer way, and how to get it back.</text>
+  <text x="80" y="540" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" fill="#5d6058">Recipes proved by running them. A skill and a plugin for Claude.</text>
+  <text x="1120" y="588" text-anchor="end" font-family="Consolas, monospace" font-size="26" fill="#5d6058">willor16.github.io/caniundo</text>
+</svg>
