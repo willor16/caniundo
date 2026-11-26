@@ -5,7 +5,7 @@
  *   node scripts/skill.ts           write it
  *   node scripts/skill.ts --check   fail if it is not up to date
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { evidenceText } from '../src/i18n.ts';
@@ -164,23 +164,80 @@ export function skillZip(): Buffer {
     .map(([path, text]) => ({ name: `caniundo/${path}`, data: Buffer.from(text, 'utf8') })));
 }
 
+export const PLUGIN_DIR = join(ROOT, 'plugin');
+
+/**
+ * The plugin for Anthropic's directory, which only takes text and images from
+ * publishers that are not verified: the skill, with no hook and no program.
+ */
+export function renderPlugin(): Map<string, Buffer> {
+  const { version } = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')) as { version: string };
+  const manifest = {
+    name: 'caniundo',
+    displayName: 'Can I undo?',
+    version,
+    description: 'Says whether a command can be undone, what it would destroy, a safer way and how to recover, from an open database of destructive commands with tested recipes.',
+    author: { name: 'willor16', url: 'https://github.com/willor16' },
+    homepage: SITE,
+    repository: 'https://github.com/willor16/caniundo',
+    license: 'MIT',
+    keywords: ['undo', 'safety', 'recovery', 'git', 'docker', 'sql'],
+  };
+  const readme = `# Can I undo?
+
+A skill that tells Claude whether a command can be undone, what it would destroy, a safer way to do it and how to recover afterwards. It comes from an open database of destructive commands: git, files, PowerShell, SQL, Docker, Kubernetes, Terraform and cloud tools. Most recipes were proved by running them on Linux, macOS and Windows.
+
+Ask in your own words, before a command or after something went wrong: "I ran git stash drop by mistake, can I get it back?"
+
+The version with a hook, which stops Claude Code before a command that cannot be undone, is in the main repository:
+
+\`\`\`
+/plugin install caniundo --marketplace willor16/caniundo
+\`\`\`
+
+This folder is generated from ${SITE.replace('https://', '')} and https://github.com/willor16/caniundo, where the entries, their tests and a version with a hook live.
+`;
+  const files = new Map<string, Buffer>([
+    ['.claude-plugin/plugin.json', Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`)],
+    ['.claude-plugin/icon.png', readFileSync(join(ROOT, '.claude-plugin', 'icon.png'))],
+    ['README.md', Buffer.from(readme)],
+    ['LICENSE', readFileSync(join(ROOT, 'LICENSE'))],
+  ]);
+  for (const [path, text] of render()) files.set(`skills/caniundo/${path}`, Buffer.from(text));
+  return files;
+}
+
+/** Every file under `dir`, with forward slashes. */
+function listFiles(dir: string): string[] {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir, { recursive: true, encoding: 'utf8' }).filter((f) => statSync(join(dir, f)).isFile()).map((f) => f.replace(/\\/g, '/'));
+}
+
 function main(): number {
-  const files = render();
+  const outputs: [string, Map<string, Buffer>][] = [
+    [SKILL_DIR, new Map([...render()].map(([p, t]) => [p, Buffer.from(t)]))],
+    [PLUGIN_DIR, renderPlugin()],
+  ];
   if (process.argv.includes('--check')) {
-    const stale = [...files].filter(([path, text]) => !existsSync(join(SKILL_DIR, path)) || readFileSync(join(SKILL_DIR, path), 'utf8') !== text);
-    const extra = existsSync(join(SKILL_DIR, 'references')) ? readdirSync(join(SKILL_DIR, 'references')).filter((f) => !files.has(`references/${f}`)) : [];
-    for (const [path] of stale) console.log(`out of date: skills/caniundo/${path}`);
-    for (const f of extra) console.log(`not generated: skills/caniundo/references/${f}`);
-    if (stale.length + extra.length > 0) { console.log('Run: npm run build'); return 1; }
-    return 0;
+    let problems = 0;
+    for (const [dir, files] of outputs) {
+      for (const [path, data] of files) {
+        if (!existsSync(join(dir, path)) || !readFileSync(join(dir, path)).equals(data)) { console.log(`out of date: ${join(dir, path)}`); problems++; }
+      }
+      for (const f of listFiles(dir)) if (!files.has(f)) { console.log(`not generated: ${join(dir, f)}`); problems++; }
+    }
+    if (problems > 0) console.log('Run: npm run build');
+    return problems > 0 ? 1 : 0;
   }
-  rmSync(SKILL_DIR, { recursive: true, force: true });
-  for (const [path, text] of files) {
-    mkdirSync(join(SKILL_DIR, path, '..'), { recursive: true });
-    writeFileSync(join(SKILL_DIR, path), text);
+  for (const [dir, files] of outputs) {
+    rmSync(dir, { recursive: true, force: true });
+    for (const [path, data] of files) {
+      mkdirSync(join(dir, path, '..'), { recursive: true });
+      writeFileSync(join(dir, path), data);
+    }
   }
   if (process.argv.includes('--zip')) writeFileSync(join(ROOT, 'caniundo.skill'), skillZip());
-  console.log(`skills/caniundo: ${files.size} files`);
+  console.log('skills/caniundo and plugin/: written');
   return 0;
 }
 

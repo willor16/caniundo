@@ -2,3 +2,4 @@
 dist/caniundo.js linguist-generated -diff
 evidence.json linguist-generated
 skills/caniundo/** linguist-generated
+plugin/** linguist-generated

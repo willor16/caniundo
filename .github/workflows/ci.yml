@@ -26,7 +26,7 @@ jobs:
       - run: npm run check
       - name: The committed program and skill match the source
         if: runner.os == 'Linux'
-        run: git diff --exit-code -- dist/caniundo.js skills/
+        run: git diff --exit-code -- dist/caniundo.js skills/ plugin/
       - name: It works on the oldest supported Node
         if: runner.os == 'Linux'
         run: npx --yes node@20 dist/caniundo.js "git commit -m x"

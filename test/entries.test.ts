@@ -4,7 +4,8 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import { EntryError, ROOT, check, digest, readEntry, readEvidence } from '../scripts/entries.ts';
 import { ENTRIES } from './helpers.ts';
-import { DESCRIPTION, SKILL_DIR, render, skillZip } from '../scripts/skill.ts';
+import { DESCRIPTION, SKILL_DIR, render, renderPlugin, skillZip } from '../scripts/skill.ts';
+import { spawnSync } from 'node:child_process';
 
 const GOOD = `
 id: example
@@ -136,6 +137,12 @@ test('the skill is up to date, and Claude.ai would accept it', () => {
   assert.equal([...files.keys()].filter((p) => p.endsWith('SKILL.md')).length, 1);
   for (const e of ENTRIES) assert.ok(skill.includes(`| \`${e.example.replace(/`/g, "'")}\` |`), `the index does not list ${e.id}`);
   for (const [, file] of skill.matchAll(/\| ([a-z]+\.md) \|/g)) assert.ok(files.has(`references/${file}`), file);
+});
+
+test('the plugin for the directory is up to date, and has only text and images', () => {
+  const r = spawnSync(process.execPath, [join(ROOT, 'scripts/skill.ts'), '--check'], { encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  for (const path of renderPlugin().keys()) assert.match(path, /\.(?:md|json|png)$|^LICENSE$/, path);
 });
 
 test('the zip has the folder inside', () => {

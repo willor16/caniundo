@@ -1,0 +1,21 @@
+{
+  "name": "caniundo",
+  "displayName": "Can I undo?",
+  "version": "0.1.0",
+  "description": "Says whether a command can be undone, what it would destroy, a safer way and how to recover, from an open database of destructive commands with tested recipes.",
+  "author": {
+    "name": "willor16",
+    "url": "https://github.com/willor16"
+  },
+  "homepage": "https://willor16.github.io/caniundo",
+  "repository": "https://github.com/willor16/caniundo",
+  "license": "MIT",
+  "keywords": [
+    "undo",
+    "safety",
+    "recovery",
+    "git",
+    "docker",
+    "sql"
+  ]
+}
