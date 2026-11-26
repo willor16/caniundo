@@ -67,7 +67,7 @@ const LABS: Record<LabName, Lab> = {
   },
   postgres: {
     version: REAL_PG ? 'psql -XAtc "select \'PostgreSQL \' || current_setting(\'server_version\')"' : 'psql -At -c "select \'PostgreSQL \' || current_setting(\'server_version\') || \' (PGlite)\'"',
-    prelude: REAL_PG ? 'export PGDATABASE=proof_$(basename "$(dirname "$PWD")" | tr -cd a-z0-9)\ncreatedb "$PGDATABASE"\n' : PSQL,
+    prelude: REAL_PG ? 'export PGDATABASE=proof_$(basename "$(dirname "$PWD")" | tr -cd a-z0-9)\ncreatedb "$PGDATABASE" 2>/dev/null || true\n' : PSQL,
   },
   // Windows can run Docker with Windows containers, which are another thing.
   docker: { version: 'docker version --format "{{.Server.Os}}" | grep -qx linux; docker version --format "Docker {{.Server.Version}}"' },
