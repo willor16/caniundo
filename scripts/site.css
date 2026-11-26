@@ -43,6 +43,8 @@ code, kbd, pre { font-family: var(--mono); font-size: .92em; }
 
 h1 { font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: 1; letter-spacing: -.035em; font-weight: 700; margin: 56px 0 28px; text-wrap: balance; }
 .lead { max-width: 40rem; color: var(--soft); margin: 18px 0 0; }
+.claude { margin: 10px 0 0; font-size: 15px; color: var(--soft); }
+.claude a { color: var(--ink); }
 
 .ask { display: flex; align-items: center; gap: 12px; background: var(--sheet); border: 2px solid var(--ink); padding: 0 18px; }
 .ask span { font-family: var(--mono); color: var(--soft); }

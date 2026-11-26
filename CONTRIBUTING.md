@@ -61,4 +61,4 @@ Labs: `git`, `files`, `npm`, `sqlite`, `postgres`, `docker` and `powershell`. Th
 
 Read a proof before you run it: it executes what the entry says. In pull requests it runs without secrets.
 
-Run `npm run build` before committing, because `dist/caniundo.js` is what the plugin uses.
+Run `npm run build` before committing. It writes `dist/caniundo.js`, which the plugin runs, and `skills/caniundo`, the skill for Claude. Never edit those by hand.

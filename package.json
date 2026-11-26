@@ -33,7 +33,8 @@
     "url": "git+https://github.com/willor16/caniundo.git"
   },
   "scripts": {
-    "build": "node scripts/build.ts",
+    "build": "node scripts/build.ts && node scripts/skill.ts",
+    "skill": "node scripts/skill.ts --zip",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"test/*.test.ts\"",
     "prove": "node scripts/prove.ts",

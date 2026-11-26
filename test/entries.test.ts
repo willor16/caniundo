@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import { EntryError, ROOT, check, digest, readEntry, readEvidence } from '../scripts/entries.ts';
 import { ENTRIES } from './helpers.ts';
+import { DESCRIPTION, SKILL_DIR, render, skillZip } from '../scripts/skill.ts';
 
 const GOOD = `
 id: example
@@ -118,4 +119,31 @@ test('a proof has to cover everything that is shown', () => {
   assert.match(problem(proof(restored, 'instead: { note: { en: A, es: A }, run: [git log], back: [] }\n')) ?? '', /`instead` is not proved/);
   assert.match(problem(proof(restored.replace('git frob', 'git log'))) ?? '', /not matched/);
   assert.match(problem(proof(restored.replace('recipe: back', 'recipe: other'))) ?? '', /does not exist/);
+});
+
+test('the skill is up to date, and Claude.ai would accept it', () => {
+  const files = render();
+  for (const [path, text] of files) assert.equal(readFileSync(join(SKILL_DIR, path), 'utf8'), text, `skills/caniundo/${path} is out of date. Run: npm run build`);
+  const skill = files.get('SKILL.md')!;
+  const front = /^---\n([\s\S]*?)\n---\n/.exec(skill)![1]!;
+  const fields = Object.fromEntries(front.split('\n').map((l) => [l.slice(0, l.indexOf(':')), l.slice(l.indexOf(':') + 1).trim()]));
+  assert.deepEqual(Object.keys(fields).sort(), ['description', 'license', 'name']);
+  assert.match(fields['name']!, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+  assert.ok(DESCRIPTION.length <= 1024, `the description has ${DESCRIPTION.length} characters`);
+  assert.doesNotMatch(DESCRIPTION, /[<>]/);
+  assert.equal(JSON.parse(fields['description']!), DESCRIPTION);
+  assert.ok(skill.split('\n').length < 500);
+  assert.equal([...files.keys()].filter((p) => p.endsWith('SKILL.md')).length, 1);
+  for (const e of ENTRIES) assert.ok(skill.includes(`| \`${e.example.replace(/`/g, "'")}\` |`), `the index does not list ${e.id}`);
+  for (const [, file] of skill.matchAll(/\| ([a-z]+\.md) \|/g)) assert.ok(files.has(`references/${file}`), file);
+});
+
+test('the zip has the folder inside', () => {
+  const bytes = skillZip();
+  const names: string[] = [];
+  for (let at = bytes.indexOf('PK\x01\x02', 0, 'latin1'); at >= 0; at = bytes.indexOf('PK\x01\x02', at + 4, 'latin1')) {
+    names.push(bytes.toString('utf8', at + 46, at + 46 + bytes.readUInt16LE(at + 28)));
+  }
+  assert.deepEqual(names, ['caniundo/SKILL.md', ...[...render().keys()].filter((p) => p !== 'SKILL.md').sort().map((p) => `caniundo/${p}`)]);
+  assert.ok(skillZip().equals(bytes), 'the zip should be the same every time');
 });

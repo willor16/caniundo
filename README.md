@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/willor16/caniundo/image?description=1&amp;descriptionEditable=Can%20I%20undo%20this%3F%20Find%20out%20before%20you%20run%20a%20command%2C%20and%20how%20to%20get%20back%20after.&amp;font=Inter&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit%20Board&amp;pulls=1&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-<p id="description">One command can delete a database, a branch or a week of work, and most tools only tell you that it is dangerous. caniundo tells you what would be lost, what to do instead and how to get it back. It is an open database that anyone can extend, and an entry is only called tested when its recipes were really run and everything came back. It works in your terminal, on the web and inside Claude Code.</p>
+<p id="description">One command can delete a database, a branch or a week of work, and most tools only tell you that it is dangerous. caniundo tells you what would be lost, what to do instead and how to get it back. It is an open database that anyone can extend, and an entry is only called tested when its recipes were really run and everything came back. It works as a skill for Claude, inside Claude Code, in your terminal and on the web.</p>
 
 <p align="center">
 <a href="https://github.com/willor16/caniundo"><img src="https://img.shields.io/badge/willor16%2Fcaniundo-black?style=social&amp;logo=github" alt="repository"></a>
@@ -28,6 +28,7 @@ Some of the project's best features:
 *   99 commands, 51 of them tested so far
 *   Says what is lost, what stays, what to do instead and how to undo it
 *   Finds the command inside `sudo`, `bash -c`, `docker exec`, `xargs`, `ssh` and others
+*   A skill for Claude.ai, Claude Desktop and Claude Code, with nothing to install
 *   Stops Claude Code before it runs something that cannot be undone
 *   Reads Bash, PowerShell and SQL
 *   Everything in English and Spanish
@@ -59,6 +60,17 @@ caniundo list git                     # what is in the database
 
 Add `--json` for other programs. The exit code is 0 when everything comes back, 1 when something does not, 2 for wrong use and 3 when nobody knows.
 
+<h2>🧠 Skill for Claude:</h2>
+
+Claude reads the database and answers from it: before a command, or after something went wrong. It needs no program and no network.
+
+| Where | How |
+| --- | --- |
+| Claude.ai and Claude Desktop | Download [caniundo-skill.zip](https://willor16.github.io/caniundo/caniundo-skill.zip) and upload it in the Skills section of the settings |
+| Claude Code | Copy [skills/caniundo](skills/caniundo) to `~/.claude/skills/`, or install the plugin below, which includes it |
+
+Then ask in your own words, for example *"I ran git stash drop by mistake, can I get it back?"*
+
 <h2>🤖 Claude Code:</h2>
 
 ```
@@ -66,7 +78,7 @@ Add `--json` for other programs. The exit code is 0 when everything comes back, 
 /plugin install caniundo@caniundo
 ```
 
-Before a command that cannot be undone, Claude Code shows you what would be lost and waits. If something already went wrong, ask for it with `/caniundo:oops`.
+Before a command that cannot be undone, Claude Code shows you what would be lost and waits. The plugin also brings the skill.
 
 | Mode | What happens |
 | --- | --- |
@@ -118,7 +130,7 @@ Nobody writes "tested" by hand. If a recipe changes, its evidence is no longer v
 
 <h2>🍰 Contribution Guidelines:</h2>
 
-An entry is a single YAML file, in English and Spanish. See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+An entry is a single YAML file, in English and Spanish. The skill, the plugin and the website are generated from those files. See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 
 <h2>💻 Built with</h2>
 

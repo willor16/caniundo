@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { evidenceText } from '../src/i18n.ts';
 import type { Entry, Lang, ProofCase, Safer, Verdict } from '../src/types.ts';
 import { ROOT, loadEntries } from './entries.ts';
+import { skillZip } from './skill.ts';
 
 const OUT = join(ROOT, 'site');
 const REPO = 'https://github.com/willor16/caniundo';
@@ -22,7 +23,7 @@ const WORDS = {
     testedWhere: 'The command and its recipes were run in a test.', documentedWhere: 'It has not been tested yet. This is what the official documentation says.',
     foot: 'This is what was found and tested, not a guarantee. Your version or your settings can behave in another way, so keep a copy of what matters.',
     cases: { restored: 'It comes back', lost: 'It is lost', before: 'The preparation works', instead: 'The safer way works' },
-    start: 'Start', run: 'Run', check: 'Passes while nothing is missing', other: 'Español', description: 'Find out before you run a command, and how to get back after.',
+    claude: 'With Claude:', skill: 'download the skill', skillHint: 'for Claude.ai, Claude Desktop and Claude Code', plugin: 'install the plugin for Claude Code', start: 'Start', run: 'Run', check: 'Passes while nothing is missing', other: 'Español', description: 'Find out before you run a command, and how to get back after.',
   },
   es: {
     yes: 'Sí', partly: 'En parte', no: 'No', unknown: 'No se sabe',
@@ -35,7 +36,7 @@ const WORDS = {
     testedWhere: 'El comando y sus recetas se ejecutaron en una prueba.', documentedWhere: 'Todavía no se ha probado. Esto es lo que dice la documentación oficial.',
     foot: 'Esto es lo que se encontró y se probó, no una garantía. Tu versión o tu configuración pueden comportarse de otra forma, así que guarda una copia de lo importante.',
     cases: { restored: 'Vuelve', lost: 'Se pierde', before: 'La preparación funciona', instead: 'La forma segura funciona' },
-    start: 'Inicio', run: 'Comando', check: 'Pasa mientras no falte nada', other: 'English', description: 'Averígualo antes de ejecutar un comando, y cómo volver después.',
+    claude: 'Con Claude:', skill: 'descarga la skill', skillHint: 'para Claude.ai, Claude Desktop y Claude Code', plugin: 'instala el plugin para Claude Code', start: 'Inicio', run: 'Comando', check: 'Pasa mientras no falte nada', other: 'English', description: 'Averígualo antes de ejecutar un comando, y cómo volver después.',
   },
 } as const;
 
@@ -91,6 +92,7 @@ function home(lang: Lang, entries: Entry[]): string {
 <h1>${esc(w.question)}</h1>
 <label class="ask"><span aria-hidden="true">$</span><input id="q" type="text" aria-label="${esc(w.label)}" placeholder="${esc(w.placeholder)}" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
 <p class="lead">${esc(w.lead)}</p>
+<p class="claude">${esc(w.claude)} <a href="${lang === 'en' ? '' : '../'}caniundo-skill.zip" download>${esc(w.skill)}</a> ${esc(w.skillHint)} · <a href="${REPO}${lang === 'en' ? '' : '/blob/main/README.es.md'}#-claude-code">${esc(w.plugin)}</a></p>
 <div id="answer" aria-live="polite"></div>
 <div id="list" aria-label="${esc(w.all)}">
 ${groups.join('\n')}
@@ -156,6 +158,7 @@ for (const lang of LANGS) {
   for (const e of entries) write(`${base}c/${e.id}/index.html`, entryPage(lang, e));
 }
 write('icon.svg', ICON);
+writeFileSync(join(OUT, 'caniundo-skill.zip'), skillZip());
 write('.nojekyll', '');
 copyFileSync(join(ROOT, 'scripts/site.css'), join(OUT, 'site.css'));
 const verdicts: (Verdict | 'unknown')[] = ['yes', 'partly', 'no', 'unknown'];

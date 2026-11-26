@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/willor16/caniundo/image?description=1&amp;descriptionEditable=%C2%BFPuedo%20deshacer%20esto%3F%20Aver%C3%ADgualo%20antes%20de%20ejecutar%20un%20comando%2C%20y%20c%C3%B3mo%20volver%20despu%C3%A9s.&amp;font=Inter&amp;forks=1&amp;issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit%20Board&amp;pulls=1&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-<p id="description">Un solo comando puede borrar una base de datos, una rama o una semana de trabajo, y casi todas las herramientas solo te dicen que es peligroso. caniundo te dice qué se perdería, qué hacer en su lugar y cómo recuperarlo. Es una base abierta que cualquiera puede ampliar, y una ficha solo se llama probada cuando sus recetas se ejecutaron de verdad y todo volvió. Funciona en tu terminal, en la web y dentro de Claude Code.</p>
+<p id="description">Un solo comando puede borrar una base de datos, una rama o una semana de trabajo, y casi todas las herramientas solo te dicen que es peligroso. caniundo te dice qué se perdería, qué hacer en su lugar y cómo recuperarlo. Es una base abierta que cualquiera puede ampliar, y una ficha solo se llama probada cuando sus recetas se ejecutaron de verdad y todo volvió. Funciona como skill para Claude, dentro de Claude Code, en tu terminal y en la web.</p>
 
 <p align="center">
 <a href="https://github.com/willor16/caniundo"><img src="https://img.shields.io/badge/willor16%2Fcaniundo-black?style=social&amp;logo=github" alt="repositorio"></a>
@@ -26,6 +26,7 @@
 *   99 comandos, 51 de ellos probados por ahora
 *   Dice qué se pierde, qué se conserva, qué hacer en su lugar y cómo deshacerlo
 *   Encuentra el comando dentro de `sudo`, `bash -c`, `docker exec`, `xargs`, `ssh` y otros
+*   Una skill para Claude.ai, Claude Desktop y Claude Code, sin instalar nada
 *   Detiene a Claude Code antes de que ejecute algo que no se puede deshacer
 *   Entiende Bash, PowerShell y SQL
 *   Todo en español e inglés
@@ -57,6 +58,17 @@ caniundo list git                     # qué hay en la base
 
 Agrega `--json` para otros programas. El código de salida es 0 cuando todo vuelve, 1 cuando algo no, 2 si se usó mal y 3 cuando no se sabe.
 
+<h2>🧠 Skill para Claude:</h2>
+
+Claude lee la base y responde a partir de ella: antes de un comando, o después de que algo salió mal. No necesita ningún programa ni conexión.
+
+| Dónde | Cómo |
+| --- | --- |
+| Claude.ai y Claude Desktop | Descarga [caniundo-skill.zip](https://willor16.github.io/caniundo/caniundo-skill.zip) y súbelo en la sección de Skills de la configuración |
+| Claude Code | Copia [skills/caniundo](skills/caniundo) a `~/.claude/skills/`, o instala el plugin de abajo, que la incluye |
+
+Luego pregunta con tus palabras, por ejemplo *«hice git stash drop sin querer, ¿lo puedo recuperar?»*
+
 <h2>🤖 Claude Code:</h2>
 
 ```
@@ -64,7 +76,7 @@ Agrega `--json` para otros programas. El código de salida es 0 cuando todo vuel
 /plugin install caniundo@caniundo
 ```
 
-Antes de un comando que no se puede deshacer, Claude Code te muestra qué se perdería y espera. Si algo ya salió mal, pide ayuda con `/caniundo:oops`.
+Antes de un comando que no se puede deshacer, Claude Code te muestra qué se perdería y espera. El plugin también trae la skill.
 
 | Modo | Qué pasa |
 | --- | --- |
@@ -116,7 +128,7 @@ Nadie escribe «probado» a mano. Si una receta cambia, su evidencia deja de val
 
 <h2>🍰 Contribuir:</h2>
 
-Una ficha es un solo archivo YAML, en español e inglés. Mira [CONTRIBUTING.md](CONTRIBUTING.md) y [SECURITY.md](SECURITY.md).
+Una ficha es un solo archivo YAML, en español e inglés. La skill, el plugin y la web se generan a partir de esos archivos. Mira [CONTRIBUTING.md](CONTRIBUTING.md) y [SECURITY.md](SECURITY.md).
 
 <h2>💻 Hecho con</h2>
 
