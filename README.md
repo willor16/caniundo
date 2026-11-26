@@ -117,6 +117,7 @@ Nobody writes "tested" by hand. If a recipe changes, its evidence is no longer v
 *   A recipe is always one plain command, from a short list of programs, with nothing hidden in it
 *   A recipe that could lose something has to say so
 *   The proofs receive no tokens from the environment
+*   Privacy: it collects, stores and sends nothing about you or your commands
 
 <h2>⚠️ Limits:</h2>
 

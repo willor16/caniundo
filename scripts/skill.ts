@@ -195,6 +195,10 @@ The version with a hook, which stops Claude Code before a command that cannot be
 /plugin install caniundo --marketplace willor16/caniundo
 \`\`\`
 
+## Privacy
+
+This plugin is only text and an icon. It collects, stores and sends nothing: no network, no telemetry, no account. Claude reads the files in this folder and answers in your conversation, and nothing leaves it because of this plugin.
+
 This folder is generated from ${SITE.replace('https://', '')} and https://github.com/willor16/caniundo, where the entries, their tests and a version with a hook live.
 `;
   const files = new Map<string, Buffer>([

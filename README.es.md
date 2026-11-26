@@ -115,6 +115,7 @@ Nadie escribe «probado» a mano. Si una receta cambia, su evidencia deja de val
 *   Una receta es siempre un solo comando, de una lista corta de programas, sin nada escondido
 *   Una receta que podría perder algo tiene que decirlo
 *   Las pruebas no reciben tokens del entorno
+*   Privacidad: no recoge, guarda ni envía nada sobre ti ni sobre tus comandos
 
 <h2>⚠️ Límites:</h2>
 
