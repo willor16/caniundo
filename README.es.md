@@ -23,7 +23,7 @@
 
 <h2>🧐 Características</h2>
 
-*   99 comandos, 51 de ellos probados por ahora
+*   99 comandos, 53 de ellos probados por ahora
 *   Dice qué se pierde, qué se conserva, qué hacer en su lugar y cómo deshacerlo
 *   Encuentra el comando dentro de `sudo`, `bash -c`, `docker exec`, `xargs`, `ssh` y otros
 *   Una skill para Claude.ai, Claude Desktop y Claude Code, sin instalar nada

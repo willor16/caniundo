@@ -62,7 +62,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "BEGIN; DELETE FROM <table>; ROLLBACK"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/postgres-delete-all/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-delete-all/)
 
 ## psql -c "ALTER TABLE users DROP COLUMN email"
@@ -82,7 +82,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "ALTER TABLE <table> RENAME COLUMN <old-column> TO <column>"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/postgres-drop-column/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-drop-column/)
 
 ## psql -c "DROP DATABASE shop"
@@ -113,7 +113,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "ALTER SCHEMA <old-schema> RENAME TO <schema>"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/postgres-drop-schema/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-drop-schema/)
 
 ## psql -c "DROP TABLE users"
@@ -127,7 +127,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "BEGIN; DROP TABLE <table>; ROLLBACK"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/postgres-drop-table/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-drop-table/)
 
 ## psql -c "TRUNCATE users"
@@ -141,7 +141,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "BEGIN; TRUNCATE <table>; ROLLBACK"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Source:** https://www.postgresql.org/docs/current/sql-truncate.html (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/postgres-truncate/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-truncate/)
 
@@ -156,7 +156,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     psql -c "BEGIN; UPDATE <table> SET <column> = 0; ROLLBACK"
     ```
-- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), Windows, 2026-11-25
+- **Evidence:** Tested: PostgreSQL 17.5 (PGlite), macOS, 2026-11-26; PostgreSQL 18.7 (Ubuntu 18.7-1.pgdg26.04+2), Linux, 2026-11-26; PostgreSQL 17.5 (PGlite), Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/postgres-update-all/ (Spanish: https://willor16.github.io/caniundo/es/c/postgres-update-all/)
 
 ## redis-cli FLUSHALL
@@ -190,7 +190,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <database>
     ```
-- **Evidence:** Tested: SQLite 3.50.4, Windows, 2026-11-25
+- **Evidence:** Tested: SQLite 3.50.6, macOS, 2026-11-26; SQLite 3.46.1, Linux, 2026-11-26; SQLite 3.49.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/sqlite-delete-all/ (Spanish: https://willor16.github.io/caniundo/es/c/sqlite-delete-all/)
 
 ## sqlite3 app.db "DROP TABLE users"
@@ -210,7 +210,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <database>
     ```
-- **Evidence:** Tested: SQLite 3.50.4, Windows, 2026-11-25
+- **Evidence:** Tested: SQLite 3.50.6, macOS, 2026-11-26; SQLite 3.46.1, Linux, 2026-11-26; SQLite 3.49.1, Windows, 2026-11-26
 - **Source:** https://sqlite.org/lang_droptable.html (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/sqlite-drop-table/ (Spanish: https://willor16.github.io/caniundo/es/c/sqlite-drop-table/)
 
@@ -231,5 +231,5 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <database>
     ```
-- **Evidence:** Tested: SQLite 3.50.4, Windows, 2026-11-25
+- **Evidence:** Tested: SQLite 3.50.6, macOS, 2026-11-26; SQLite 3.46.1, Linux, 2026-11-26; SQLite 3.49.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/sqlite-update-all/ (Spanish: https://willor16.github.io/caniundo/es/c/sqlite-update-all/)

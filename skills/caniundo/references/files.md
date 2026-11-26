@@ -44,7 +44,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <file>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/cp/ (Spanish: https://willor16.github.io/caniundo/es/c/cp/)
 
 ## dd if=image.iso of=/dev/sdb
@@ -64,7 +64,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <file>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/dd/ (Spanish: https://willor16.github.io/caniundo/es/c/dd/)
 
 ## find . -name "*.log" -delete
@@ -78,7 +78,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     find . -name <pattern> -print
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/find-delete/ (Spanish: https://willor16.github.io/caniundo/es/c/find-delete/)
 
 ## mv draft.txt final.txt
@@ -95,7 +95,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     mv <new> <old>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/mv/ (Spanish: https://willor16.github.io/caniundo/es/c/mv/)
 
 ## echo hello > notes.txt
@@ -117,7 +117,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <file>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/redirect/ (Spanish: https://willor16.github.io/caniundo/es/c/redirect/)
 
 ## rm -rf dist
@@ -134,7 +134,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     npm run build
     ```
-- **Evidence:** Tested: npm 11.6.2, Windows, 2026-11-25
+- **Evidence:** Tested: npm 11.19.1, macOS, 2026-11-26; npm 11.19.1, Linux, 2026-11-26; npm 11.19.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/rm-build-output/ (Spanish: https://willor16.github.io/caniundo/es/c/rm-build-output/)
 
 ## rm -rf .git
@@ -155,7 +155,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     mv <elsewhere> .git
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/rm-git/ (Spanish: https://willor16.github.io/caniundo/es/c/rm-git/)
 
 ## rm -rf __pycache__
@@ -180,7 +180,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
 - **More specific than:** `rm -rf folder`
 - **Everyday command:** mention it only when asked, or when it matters.
 - **Lost:** The temporary files.
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/rm-temporary/ (Spanish: https://willor16.github.io/caniundo/es/c/rm-temporary/)
 
 ## rm -rf folder
@@ -200,7 +200,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     mv <elsewhere> <path>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/rm/ (Spanish: https://willor16.github.io/caniundo/es/c/rm/)
 
 ## rsync -a --delete source/ backup/
@@ -232,7 +232,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     mv <file>.bak <file>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: Darwin 25.6.0, macOS, 2026-11-26; GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/sed-in-place/ (Spanish: https://willor16.github.io/caniundo/es/c/sed-in-place/)
 
 ## shred -u secret.txt
@@ -241,7 +241,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
 
 - **Matches:** `shred`; or `gshred`; or `srm`
 - **Lost:** The file. It is overwritten so that nobody can recover it.
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/shred/ (Spanish: https://willor16.github.io/caniundo/es/c/shred/)
 
 ## truncate -s 0 app.log
@@ -261,7 +261,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <file>
     ```
-- **Evidence:** Tested: GNU coreutils 8.32, Windows, 2026-11-25
+- **Evidence:** Tested: GNU coreutils 9.7, Linux, 2026-11-26; GNU coreutils 8.32, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/truncate/ (Spanish: https://willor16.github.io/caniundo/es/c/truncate/)
 
 ## rm -rf node_modules
@@ -277,7 +277,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     npm ci
     ```
-- **Evidence:** Tested: npm 11.6.2, Windows, 2026-11-25
+- **Evidence:** Tested: npm 11.19.1, macOS, 2026-11-26; npm 11.19.1, Linux, 2026-11-26; npm 11.19.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/rm-node-modules/ (Spanish: https://willor16.github.io/caniundo/es/c/rm-node-modules/)
 
 ## crontab -r
@@ -325,7 +325,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     Copy-Item <copy> <file>
     ```
-- **Evidence:** Tested: PowerShell 5.1.26100.9818, Windows, 2026-11-25
+- **Evidence:** Tested: PowerShell 7.6.10, macOS, 2026-11-26; PowerShell 7.6.10, Linux, 2026-11-26; PowerShell 5.1.26100.33822, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/clear-content/ (Spanish: https://willor16.github.io/caniundo/es/c/clear-content/)
 
 ## Clear-RecycleBin -Force
@@ -344,7 +344,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
 
 - **Matches:** `rd`, with `/s` or `/S`; or `rmdir`, with `/s` or `/S`; or `del`; or `erase`
 - **Lost:** The files. They do not go to the Recycle Bin.
-- **Evidence:** Tested: PowerShell 5.1.26100.9818, Windows, 2026-11-25
+- **Evidence:** Tested: PowerShell 5.1.26100.33822, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/cmd-delete/ (Spanish: https://willor16.github.io/caniundo/es/c/cmd-delete/)
 
 ## Remove-Item -Recurse folder
@@ -364,7 +364,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     Move-Item <elsewhere> <path>
     ```
-- **Evidence:** Tested: PowerShell 5.1.26100.9818, Windows, 2026-11-25
+- **Evidence:** Tested: PowerShell 7.6.10, macOS, 2026-11-26; PowerShell 7.6.10, Linux, 2026-11-26; PowerShell 5.1.26100.33822, Windows, 2026-11-26
 - **Source:** https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/remove-item (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/remove-item/ (Spanish: https://willor16.github.io/caniundo/es/c/remove-item/)
 
@@ -386,5 +386,5 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     Copy-Item <copy> <file>
     ```
-- **Evidence:** Tested: PowerShell 5.1.26100.9818, Windows, 2026-11-25
+- **Evidence:** Tested: PowerShell 7.6.10, macOS, 2026-11-26; PowerShell 7.6.10, Linux, 2026-11-26; PowerShell 5.1.26100.33822, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/set-content/ (Spanish: https://willor16.github.io/caniundo/es/c/set-content/)

@@ -46,7 +46,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     cp <copy> <file>
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-abort/ (Spanish: https://willor16.github.io/caniundo/es/c/git-abort/)
 
 ## git branch -D feature
@@ -63,7 +63,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git branch <name> <commit>
     ```
   - Until: 30 days by default, if you had that branch checked out in this copy.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-branch-delete/ (Spanish: https://willor16.github.io/caniundo/es/c/git-branch-delete/)
 
@@ -80,7 +80,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git branch --force <name> <name>@{1}
     ```
   - Until: 30 days by default. The 1 means one move ago.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-branch-force/ (Spanish: https://willor16.github.io/caniundo/es/c/git-branch-force/)
 
@@ -101,7 +101,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git stash pop
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-checkout-files/ (Spanish: https://willor16.github.io/caniundo/es/c/git-checkout-files/)
 
 ## git checkout -f main
@@ -124,7 +124,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git switch -
     git stash pop
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-checkout-force/ (Spanish: https://willor16.github.io/caniundo/es/c/git-checkout-force/)
 
 ## git cherry-pick a1b2c3d
@@ -140,7 +140,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --keep HEAD~1
     ```
   - Until: Right after, and before you push it.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-cherry-pick/ (Spanish: https://willor16.github.io/caniundo/es/c/git-cherry-pick/)
 
 ## git clean -fd
@@ -160,7 +160,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git stash pop
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-clean/ (Spanish: https://willor16.github.io/caniundo/es/c/git-clean/)
 
 ## git commit --amend
@@ -176,7 +176,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --soft HEAD@{1}
     ```
   - Until: 30 days by default. The 1 means one move ago, so check git reflog if you did something else after.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-commit-amend/ (Spanish: https://willor16.github.io/caniundo/es/c/git-commit-amend/)
 
@@ -193,7 +193,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --soft HEAD~1
     ```
   - Until: Before you push it. After that, use git revert.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-commit/ (Spanish: https://willor16.github.io/caniundo/es/c/git-commit/)
 
 ## git filter-branch --tree-filter "rm -f secret.txt" HEAD
@@ -208,7 +208,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --keep refs/original/refs/heads/<branch>
     ```
   - Until: Until refs/original is deleted or another filter-branch replaces it.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-filter-branch/ (Spanish: https://willor16.github.io/caniundo/es/c/git-filter-branch/)
 
 ## git filter-repo --path secret.txt --invert-paths
@@ -235,7 +235,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --keep ORIG_HEAD
     ```
   - Until: Until another reset, merge or rebase, and before you push it.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-merge/ (Spanish: https://willor16.github.io/caniundo/es/c/git-merge/)
 
 ## git gc --prune=now
@@ -249,7 +249,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git gc
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-prune/ (Spanish: https://willor16.github.io/caniundo/es/c/git-prune/)
 
@@ -265,7 +265,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git push origin <commit>:refs/heads/<branch>
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-push-delete/ (Spanish: https://willor16.github.io/caniundo/es/c/git-push-delete/)
 
 ## git push --force
@@ -283,7 +283,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git push --force-with-lease origin origin/<branch>@{1}:refs/heads/<branch>
     ```
   - Until: 30 days by default, in this copy. The 1 means one move ago.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-push-force/ (Spanish: https://willor16.github.io/caniundo/es/c/git-push-force/)
 
@@ -300,7 +300,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git push --force-with-lease origin origin/<branch>@{1}:refs/heads/<branch>
     ```
   - Until: 30 days by default, in this copy. The 1 means one move ago.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-push-lease/ (Spanish: https://willor16.github.io/caniundo/es/c/git-push-lease/)
 
@@ -317,7 +317,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git reset --keep <branch>@{1}
     ```
   - Until: 30 days by default. The 1 means one move ago.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-rebase/ (Spanish: https://willor16.github.io/caniundo/es/c/git-rebase/)
 
@@ -352,7 +352,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     cp .git/lost-found/other/<hash> <file>
     ```
   - Until: Until git cleans up, 2 weeks by default.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-reset-hard/ (Spanish: https://willor16.github.io/caniundo/es/c/git-reset-hard/)
 
@@ -373,7 +373,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git stash pop
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-restore/ (Spanish: https://willor16.github.io/caniundo/es/c/git-restore/)
 
 ## git rm -f old.txt
@@ -390,7 +390,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git restore --staged --worktree -- <file>
     ```
   - Careful: Replaces a new file with the same name.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-rm-force/ (Spanish: https://willor16.github.io/caniundo/es/c/git-rm-force/)
 
 ## git rm old.txt
@@ -406,7 +406,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git restore --staged --worktree -- <file>
     ```
   - Careful: Replaces a new file with the same name.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-rm/ (Spanish: https://willor16.github.io/caniundo/es/c/git-rm/)
 
 ## git stash clear
@@ -422,7 +422,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git stash store <hash>
     ```
   - Until: Until git cleans up, 2 weeks by default.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-stash-clear/ (Spanish: https://willor16.github.io/caniundo/es/c/git-stash-clear/)
 
@@ -440,7 +440,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     git stash apply <hash>
     ```
   - Until: Until git cleans up, 2 weeks by default.
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-stash-drop/ (Spanish: https://willor16.github.io/caniundo/es/c/git-stash-drop/)
 
@@ -463,7 +463,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git tag <name> <commit>
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Source:** https://git-scm.com/docs/git-gc (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/git-tag-delete/ (Spanish: https://willor16.github.io/caniundo/es/c/git-tag-delete/)
 
@@ -480,7 +480,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git add <file>
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-unstage/ (Spanish: https://willor16.github.io/caniundo/es/c/git-unstage/)
 
 ## git worktree remove ../feature
@@ -495,5 +495,5 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     git worktree add <folder> <branch>
     ```
-- **Evidence:** Tested: git 2.45.2.windows.1, Windows, 2026-11-25
+- **Evidence:** Tested: git 2.56.1, macOS, 2026-11-26; git 2.56.1, Linux, 2026-11-26; git 2.56.1.windows.1, Windows, 2026-11-26
 - **Page:** https://willor16.github.io/caniundo/c/git-worktree-remove/ (Spanish: https://willor16.github.io/caniundo/es/c/git-worktree-remove/)

@@ -32,7 +32,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     docker compose up --detach
     ```
-- **Evidence:** Documented, not tested
+- **Evidence:** Tested: Docker 29.4.2, Linux, 2026-11-26
 - **Source:** https://docs.docker.com/reference/cli/docker/compose/down/ (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/docker-compose-down-volumes/ (Spanish: https://willor16.github.io/caniundo/es/c/docker-compose-down-volumes/)
 
@@ -70,7 +70,7 @@ Generated from `entries/` in https://github.com/willor16/caniundo. Do not edit b
     ```sh
     docker start <container>
     ```
-- **Evidence:** Documented, not tested
+- **Evidence:** Tested: Docker 29.4.2, Linux, 2026-11-26
 - **Source:** https://docs.docker.com/reference/cli/docker/container/rm/ (checked 2026-11-25)
 - **Source:** https://docs.docker.com/engine/storage/ (checked 2026-11-25)
 - **Page:** https://willor16.github.io/caniundo/c/docker-rm/ (Spanish: https://willor16.github.io/caniundo/es/c/docker-rm/)

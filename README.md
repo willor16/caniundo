@@ -25,7 +25,7 @@
 
 Some of the project's best features:
 
-*   99 commands, 51 of them tested so far
+*   99 commands, 53 of them tested so far
 *   Says what is lost, what stays, what to do instead and how to undo it
 *   Finds the command inside `sudo`, `bash -c`, `docker exec`, `xargs`, `ssh` and others
 *   A skill for Claude.ai, Claude Desktop and Claude Code, with nothing to install

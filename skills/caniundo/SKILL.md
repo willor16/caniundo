@@ -8,7 +8,7 @@ license: MIT
 
 Recovery depends on details that are easy to get wrong from memory: which flag deletes the volumes, how many days a reflog keeps a commit, whether a backup lives inside the thing that was deleted. Each entry in `references/` says what a command loses, a safer way, and recipes to get things back, and most recipes were run in a test where everything came back. Answer from the entry, not from memory, because a confident wrong answer here costs someone their data.
 
-The database has 99 commands, 51 of them tested.
+The database has 99 commands, 53 of them tested.
 
 ## Find the entry
 
