@@ -24,10 +24,10 @@ proof:
   lab: docker
   cases:
     - shows: instead
-      setup: docker rm -f caniundo-a >/dev/null 2>&1 || true; docker run --detach --name caniundo-a busybox:1.37 sleep 300; docker exec caniundo-a sh -c 'echo one > /a.txt'
+      setup: docker rm -f caniundo-a >/dev/null 2>&1 || true; docker run --detach --init --name caniundo-a busybox:1.37 sleep 300; docker exec caniundo-a sh -c 'echo one > /a.txt'
       run: docker rm -f caniundo-a
       check: docker exec caniundo-a cat /a.txt | grep -q one
-      fill: { container: "-t 0 caniundo-a" }
+      fill: { container: caniundo-a }
     - shows: lost
       setup: docker rm -f caniundo-b >/dev/null 2>&1 || true; docker run --detach --name caniundo-b busybox:1.37 sleep 300; docker exec caniundo-b sh -c 'echo one > /a.txt'
       run: docker rm -f caniundo-b; docker run --detach --name caniundo-b busybox:1.37 sleep 300
