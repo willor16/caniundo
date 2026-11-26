@@ -7,6 +7,7 @@
 <p align="center">
 <a href="https://github.com/willor16/caniundo"><img src="https://img.shields.io/badge/willor16%2Fcaniundo-black?style=social&amp;logo=github" alt="repositorio"></a>
 <a href="https://github.com/willor16/caniundo/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/willor16/caniundo/ci.yml?branch=main&amp;label=CI" alt="CI"></a>
+<a href="https://www.npmjs.com/package/caniundo"><img src="https://img.shields.io/npm/v/caniundo" alt="npm"></a>
 <img src="https://img.shields.io/badge/dependencias-0-brightgreen" alt="sin dependencias">
 <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-MIT-blue" alt="licencia MIT"></a>
 </p>
@@ -35,17 +36,14 @@
 
 Necesitas [Node.js](https://nodejs.org) 20 o posterior.
 
-<p>1. Clona el repositorio</p>
-
 ```sh
-git clone https://github.com/willor16/caniundo.git
-cd caniundo
+npm install -g caniundo
 ```
 
-<p>2. Instala el comando</p>
+O úsalo sin instalar nada:
 
 ```sh
-npm install -g .
+npx caniundo "git reset --hard"
 ```
 
 <h2>💡 Uso:</h2>

@@ -7,6 +7,7 @@
 <p align="center">
 <a href="https://github.com/willor16/caniundo"><img src="https://img.shields.io/badge/willor16%2Fcaniundo-black?style=social&amp;logo=github" alt="repository"></a>
 <a href="https://github.com/willor16/caniundo/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/willor16/caniundo/ci.yml?branch=main&amp;label=CI" alt="CI"></a>
+<a href="https://www.npmjs.com/package/caniundo"><img src="https://img.shields.io/npm/v/caniundo" alt="npm"></a>
 <img src="https://img.shields.io/badge/runtime%20dependencies-0-brightgreen" alt="no runtime dependencies">
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
@@ -37,17 +38,14 @@ Some of the project's best features:
 
 You need [Node.js](https://nodejs.org) 20 or later.
 
-<p>1. Clone the repository</p>
-
 ```sh
-git clone https://github.com/willor16/caniundo.git
-cd caniundo
+npm install -g caniundo
 ```
 
-<p>2. Install the command</p>
+Or run it without installing anything:
 
 ```sh
-npm install -g .
+npx caniundo "git reset --hard"
 ```
 
 <h2>💡 Usage:</h2>
